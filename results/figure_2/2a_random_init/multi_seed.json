@@ -1,0 +1,32 @@
+{
+  "aggregate": {
+    "real": {
+      "audio_cone_mean": 0.619457875605022,
+      "audio_cone_min": 0.6095708571452819,
+      "audio_cone_max": 0.6296620203154376,
+      "audio_cone_std": 0.008577530039155016,
+      "text_cone_mean": 0.612949258438266,
+      "text_cone_min": 0.5862687208851395,
+      "text_cone_max": 0.6477777093429177,
+      "text_cone_std": 0.023498429599889792,
+      "gap_distance_mean": 0.7675443591534419,
+      "gap_distance_min": 0.7207702591864462,
+      "gap_distance_max": 0.8057183215745991,
+      "gap_distance_std": 0.030367727172353316
+    },
+    "noise": {
+      "audio_cone_mean": 0.6273621480172545,
+      "audio_cone_min": 0.6052767302145209,
+      "audio_cone_max": 0.6433154378924664,
+      "audio_cone_std": 0.014997553203861503,
+      "text_cone_mean": 0.6232310576111614,
+      "text_cone_min": 0.5972680882065354,
+      "text_cone_max": 0.6575731771779044,
+      "text_cone_std": 0.022554032316520565,
+      "gap_distance_mean": 0.7796833562742089,
+      "gap_distance_min": 0.7451654726462039,
+      "gap_distance_max": 0.8136586933445803,
+      "gap_distance_std": 0.025049177235349274
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "n_pairs": 1290,
+  "embed_dim": 1024,
+  "gap_distance": 0.778573700334158,
+  "audio_centroid_norm": 0.5492256830077363,
+  "text_centroid_norm": 0.6304355736515458,
+  "pair_cosine_mean": 0.3385619868158165,
+  "pair_cosine_std": 0.12569866505240762,
+  "audio_cone_mean": 0.30110707341284404,
+  "text_cone_mean": 0.3969815563674989
+}
