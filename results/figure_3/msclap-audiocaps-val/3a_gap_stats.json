@@ -1,0 +1,57 @@
+{
+  "mode": "real",
+  "backbone": "msclap",
+  "timestamp": "2026-05-20T21:48:38.676772+00:00",
+  "command": "figure_3_contrastive_learning/run.py --backbone msclap --real",
+  "git_commit": "8f3ff755e36f4c5eff20d8648a34c25e461a3c52",
+  "machine_info": {
+    "hostname": "PROENG93",
+    "platform": "Linux-6.11.0-29-generic-x86_64-with-glibc2.39",
+    "python": "3.10.16 (main, Dec  4 2024, 08:53:38) [GCC 13.2.0]",
+    "executable": "/home/rwik/leiden_projects/MG-CLAP/venv/bin/python",
+    "processor": "x86_64",
+    "pid": 2839456
+  },
+  "input_cache_paths": {
+    "audiocaps_val": {
+      "path": "/home/rwik/leiden_projects/MG-CLAP/embeddings/msclap/audiocaps__val.npz",
+      "exists": true,
+      "mtime": "2026-05-20T21:44:24.138277+00:00",
+      "size_bytes": 4510285
+    }
+  },
+  "input_cache_exists": {
+    "audiocaps_val": true
+  },
+  "data_shapes": {
+    "audio": [
+      590,
+      1024
+    ],
+    "text": [
+      590,
+      1024
+    ]
+  },
+  "results": {
+    "n_pairs": 590,
+    "embed_dim": 1024,
+    "gap_distance": 0.7651656144753478,
+    "audio_centroid_norm": 0.5689616202369682,
+    "text_centroid_norm": 0.6277926505306118,
+    "delta_top5_axes": [
+      648,
+      868,
+      841,
+      272,
+      182
+    ],
+    "delta_top5_magnitudes": [
+      0.10004891001560791,
+      0.09146874416252569,
+      0.08121199036039385,
+      0.07850611917015188,
+      0.07266143433741179
+    ]
+  }
+}

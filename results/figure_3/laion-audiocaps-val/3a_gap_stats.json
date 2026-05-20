@@ -1,7 +1,7 @@
 {
-  "mode": "synthetic",
+  "mode": "real",
   "backbone": "laion",
-  "timestamp": "2026-05-20T20:02:49.748181+00:00",
+  "timestamp": "2026-05-20T20:48:55.985548+00:00",
   "command": "figure_3_contrastive_learning/run.py --backbone laion --real",
   "git_commit": "8f3ff755e36f4c5eff20d8648a34c25e461a3c52",
   "machine_info": {
@@ -10,48 +10,48 @@
     "python": "3.10.16 (main, Dec  4 2024, 08:53:38) [GCC 13.2.0]",
     "executable": "/home/rwik/leiden_projects/MG-CLAP/venv/bin/python",
     "processor": "x86_64",
-    "pid": 2815425
+    "pid": 2831081
   },
   "input_cache_paths": {
     "audiocaps_val": {
       "path": "/home/rwik/leiden_projects/MG-CLAP/embeddings/laion/audiocaps__val.npz",
-      "exists": false,
-      "mtime": null,
-      "size_bytes": null
+      "exists": true,
+      "mtime": "2026-05-20T20:29:04.313605+00:00",
+      "size_bytes": 2203427
     }
   },
   "input_cache_exists": {
-    "audiocaps_val": false
+    "audiocaps_val": true
   },
   "data_shapes": {
     "audio": [
-      400,
+      590,
       512
     ],
     "text": [
-      400,
+      590,
       512
     ]
   },
   "results": {
-    "n_pairs": 400,
+    "n_pairs": 590,
     "embed_dim": 512,
-    "gap_distance": 0.8200000000038128,
-    "audio_centroid_norm": 0.41226654824705283,
-    "text_centroid_norm": 0.41170490717499736,
+    "gap_distance": 0.4599620492965884,
+    "audio_centroid_norm": 0.3971949574914662,
+    "text_centroid_norm": 0.3584589358892256,
     "delta_top5_axes": [
-      0,
-      369,
-      183,
-      135,
-      434
+      450,
+      494,
+      126,
+      143,
+      504
     ],
     "delta_top5_magnitudes": [
-      0.8191038955807228,
-      0.007347831259424642,
-      0.004867335349738487,
-      0.00464535411216695,
-      0.0042669053309604184
+      0.0678917401719963,
+      0.06448226948904462,
+      0.06008960291368329,
+      0.05294974577683684,
+      0.05175358050469317
     ]
   }
 }

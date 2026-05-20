@@ -1,0 +1,1407 @@
+
+
+### Pipeline run started 2026-05-21T01:32:40.307523 ###
+
+================================================================================
+[2026-05-21T01:32:40.307557] START Check Files
+COMMAND: ls -R embeddings data results | head -300
+================================================================================
+ls: cannot access 'embeddings': No such file or directory
+ls: cannot access 'data': No such file or directory
+results:
+figure_1
+figure_2
+figure_3
+mgclap_pipeline.log
+PROJECT_STATUS.json
+PROJECT_STATUS.md
+table_1
+table_1_training
+
+results/figure_1:
+laion-audiocaps-val
+msclap-audiocaps-val
+
+results/figure_1/laion-audiocaps-val:
+gap_cosines.png
+gap_pca.png
+gap_umap.png
+stats.json
+
+results/figure_1/msclap-audiocaps-val:
+gap_cosines.png
+gap_pca.png
+gap_umap.png
+stats.json
+
+results/figure_2:
+2a_random_init
+2b_random_mlp
+2c_scatter_cones
+
+results/figure_2/2a_random_init:
+cone_real_vs_noise.png
+multi_seed.json
+summary.json
+
+results/figure_2/2b_random_mlp:
+cone_sweep_noise-bias.json
+cone_sweep_noise-bias.png
+cone_sweep_noise-nobias.json
+cone_sweep_noise-nobias.png
+cone_sweep_real-bias.json
+cone_sweep_real-bias.png
+cone_sweep_real-nobias.json
+cone_sweep_real-nobias.png
+
+results/figure_2/2c_scatter_cones:
+pairwise_gap.png
+scatter_cones.png
+summary.json
+
+results/figure_3:
+synth-gap0.82
+
+results/figure_3/synth-gap0.82:
+3a_gap_stats.json
+3b_landscape.json
+3b_loss_landscape.png
+3c_3d_sphere.png
+3d_optimization.json
+3d_optimization.png
+
+results/table_1:
+simulation
+
+results/table_1/simulation:
+shift_sweep.png
+summary.json
+
+results/table_1_training:
+laion
+
+results/table_1_training/laion:
+sweep_final_gap.png
+sweep.json
+training_curves.png
+
+[2026-05-21T01:32:40.314883] END Check Files (exit=0, elapsed=0.0s)
+
+================================================================================
+[2026-05-21T01:32:40.315110] START Extract LAION AudioCaps
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+================================================================================
+loading backbone: laion
+Traceback (most recent call last):
+  File "/home/rwik/leiden_projects/MG-CLAP/lib/clap_models.py", line 95, in __init__
+    import laion_clap  # type: ignore
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/__init__.py", line 5, in <module>
+    from .hook import CLAP_Module
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/hook.py", line 11, in <module>
+    from clap_module import create_model
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/__init__.py", line 1, in <module>
+    from .factory import list_models, create_model, create_model_and_transforms, add_model_config
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/factory.py", line 13, in <module>
+    from .model import CLAP, convert_weights_to_fp16
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/model.py", line 17, in <module>
+    from .timm_model import TimmModel
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/timm_model.py", line 17, in <module>
+    from .utils import freeze_batch_norm_2d
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/utils.py", line 4, in <module>
+    from torchvision.ops.misc import FrozenBatchNorm2d
+ModuleNotFoundError: No module named 'torchvision'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/rwik/leiden_projects/MG-CLAP/scripts/01_extract_embeddings.py", line 243, in <module>
+    main()
+  File "/home/rwik/leiden_projects/MG-CLAP/scripts/01_extract_embeddings.py", line 228, in main
+    backbone = load_backbone(args.backbone)
+  File "/home/rwik/leiden_projects/MG-CLAP/lib/clap_models.py", line 298, in load_backbone
+    return _BACKBONES[name](**kwargs)
+  File "/home/rwik/leiden_projects/MG-CLAP/lib/clap_models.py", line 98, in __init__
+    raise ImportError(
+ImportError: LAION-CLAP requires `pip install laion-clap`.
+
+[2026-05-21T01:32:42.344043] END Extract LAION AudioCaps (exit=1, elapsed=2.0s)
+
+================================================================================
+[2026-05-21T01:32:42.344261] START Extract LAION ESC-50
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+================================================================================
+loading backbone: laion
+Traceback (most recent call last):
+  File "/home/rwik/leiden_projects/MG-CLAP/lib/clap_models.py", line 95, in __init__
+    import laion_clap  # type: ignore
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/__init__.py", line 5, in <module>
+    from .hook import CLAP_Module
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/hook.py", line 11, in <module>
+    from clap_module import create_model
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/__init__.py", line 1, in <module>
+    from .factory import list_models, create_model, create_model_and_transforms, add_model_config
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/factory.py", line 13, in <module>
+    from .model import CLAP, convert_weights_to_fp16
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/model.py", line 17, in <module>
+    from .timm_model import TimmModel
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/timm_model.py", line 17, in <module>
+    from .utils import freeze_batch_norm_2d
+  File "/home/rwik/leiden_projects/MG-CLAP/venv/lib/python3.10/site-packages/laion_clap/clap_module/utils.py", line 4, in <module>
+    from torchvision.ops.misc import FrozenBatchNorm2d
+ModuleNotFoundError: No module named 'torchvision'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/rwik/leiden_projects/MG-CLAP/scripts/01_extract_embeddings.py", line 243, in <module>
+    main()
+  File "/home/rwik/leiden_projects/MG-CLAP/scripts/01_extract_embeddings.py", line 228, in main
+    backbone = load_backbone(args.backbone)
+  File "/home/rwik/leiden_projects/MG-CLAP/lib/clap_models.py", line 298, in load_backbone
+    return _BACKBONES[name](**kwargs)
+  File "/home/rwik/leiden_projects/MG-CLAP/lib/clap_models.py", line 98, in __init__
+    raise ImportError(
+ImportError: LAION-CLAP requires `pip install laion-clap`.
+
+[2026-05-21T01:32:44.210569] END Extract LAION ESC-50 (exit=1, elapsed=1.9s)
+
+================================================================================
+[2026-05-21T01:32:44.210725] START Continual Dry Run LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold 1 --dry-run
+================================================================================
+Missing required caches for real MG-CLAP-lite continual learning.
+Run these commands first:
+python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+Missing cache files:
+/home/rwik/leiden_projects/MG-CLAP/embeddings/laion/audiocaps__val.npz
+/home/rwik/leiden_projects/MG-CLAP/embeddings/laion/esc50.npz
+
+[2026-05-21T01:32:45.725369] END Continual Dry Run LAION (exit=1, elapsed=1.5s)
+
+================================================================================
+[2026-05-21T01:32:45.725540] START Continual Full LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 0 1 2 4 8 --seed 0
+================================================================================
+Missing required caches for real MG-CLAP-lite continual learning.
+Run these commands first:
+python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+Missing cache files:
+/home/rwik/leiden_projects/MG-CLAP/embeddings/laion/audiocaps__val.npz
+/home/rwik/leiden_projects/MG-CLAP/embeddings/laion/esc50.npz
+
+[2026-05-21T01:32:47.205161] END Continual Full LAION (exit=1, elapsed=1.5s)
+
+================================================================================
+[2026-05-21T01:32:47.205423] START Real Shift LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/run.py --mode shift --backbone laion
+================================================================================
+[warn] missing cache(s):
+  /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/audiocaps__val.npz: False
+  /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/esc50.npz: False
+→ run scripts/01_extract_embeddings.py for both datasets, or use --mode simulation
+
+[2026-05-21T01:32:48.585061] END Real Shift LAION (exit=0, elapsed=1.4s)
+
+================================================================================
+[2026-05-21T01:32:48.585253] START Real Figure 3 LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python figure_3_contrastive_learning/run.py --backbone laion --real
+================================================================================
+[warn] No cache: /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/audiocaps__val.npz.  Run scripts/01_extract_embeddings.py first.
+[warn] falling back to synthetic
+[synthetic] n=400 pairs, target gap=0.82
+
+[3a] gap stats:
+{
+  "n_pairs": 400,
+  "embed_dim": 512,
+  "gap_distance": 0.8200000000038128,
+  "audio_centroid_norm": 0.41226654824705283,
+  "text_centroid_norm": 0.41170490717499736,
+  "delta_top5_axes": [
+    0,
+    369,
+    183,
+    135,
+    434
+  ],
+  "delta_top5_magnitudes": [
+    0.8191038955807228,
+    0.007347831259424642,
+    0.004867335349738487,
+    0.00464535411216695,
+    0.0042669053309604184
+  ]
+}
+
+[3b] sweeping loss landscape...
+  τ=0.01  argmin gap=0.677  loss=0.000
+  τ=0.02  argmin gap=0.001  loss=0.000
+  τ=0.03333  argmin gap=0.001  loss=0.000
+  τ=0.05  argmin gap=0.001  loss=0.001
+  τ=0.1  argmin gap=0.001  loss=0.488
+  τ=1  argmin gap=0.001  loss=5.338
+
+[3c] 3D-sphere snapshots at λ=[-0.25, 0.0, 0.25, 0.5]
+
+[3d] optimizing λ under InfoNCE...
+  τ=0.01  final gap=0.820  final loss=0.000
+  τ=0.02  final gap=0.820  final loss=0.000
+  τ=0.03333  final gap=0.810  final loss=0.000
+  τ=0.05  final gap=0.439  final loss=0.002
+  τ=0.1  final gap=0.001  final loss=0.488
+  τ=1  final gap=0.001  final loss=5.338
+
+results under /home/rwik/leiden_projects/MG-CLAP/results/figure_3/synth-gap0.82
+
+[2026-05-21T01:33:23.460014] END Real Figure 3 LAION (exit=0, elapsed=34.9s)
+
+================================================================================
+[2026-05-21T01:33:23.460155] START Summarize Project
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/summarize_mgclap_project.py
+================================================================================
+Wrote /home/rwik/leiden_projects/MG-CLAP/results/PROJECT_STATUS.md
+Wrote /home/rwik/leiden_projects/MG-CLAP/results/PROJECT_STATUS.json
+
+[2026-05-21T01:33:24.574926] END Summarize Project (exit=0, elapsed=1.1s)
+### Pipeline run finished 2026-05-21T01:33:24.575120 ###
+
+
+### Pipeline run started 2026-05-21T02:02:09.959513 ###
+
+================================================================================
+[2026-05-21T02:02:09.959528] START Check Files
+COMMAND: ls -R embeddings data results | head -300
+================================================================================
+data:
+audiocaps
+esc50
+
+data/audiocaps:
+audio
+csv
+
+data/audiocaps/audio:
+val
+
+data/audiocaps/audio/val:
+rqfQRErjfk8_170.webm
+rqu8iB22I_Y_5.wav
+rwT__ERCUno_90.m4a
+rwtmaKiCcQU_30.m4a
+ryFDPxgDOGc_570.wav
+s-T9OVOiMLo_330.wav
+s3cT_DAj31g_80.webm
+s4Uz1Ffgo04_100.webm
+s4tUs779vBA_160.m4a
+s59PfAghdkM_0.webm
+s6DESzUTGjY_16.wav
+s7knHCFW82w_30.m4a
+sAam2NqGhLY_20.m4a
+sC_i_y7QS1U_300.wav
+sCeWURVHfOM_30.m4a
+sDSppXIlJrs_27.m4a
+sEprKHm8Sj8_90.m4a
+sG7TyPnFDR0_180.m4a
+sGgBtiZY0U8_30.webm
+sHbXC6na9hg_0.m4a
+sIXTftIuUgw_90.wav
+sK4u5T8hW78_30.wav
+sLUnaPT5gM8_0.wav
+sLkeqCDJIyw_120.wav
+sNB8zxXneIM_20.webm
+sOa7g-44Dag_30.m4a
+sQGXqGcwOTc_3.wav
+sQwlkXjQabo_10.wav
+sSMl2vc3e_k_20.wav
+sShpyu2l4YQ_0.webm
+sTpirNYo8vQ_30.m4a
+sU53zg9Jp7s_380.webm
+sUVVjE3Ucp8_0.webm
+sW_ZzX_uWYY_420.webm
+sYITalLZjj4_30.webm
+sZPuqDgX2V0_30.m4a
+sZvwOuuPGP0_50.wav
+s_apQIQUhFc_280.webm
+sa6TLVbooCc_240.m4a
+scYRUkrFLiQ_30.m4a
+sd7x_Vssqlw_50.webm
+sd_XV-ylviw_190.wav
+sdv_I1mHAsc_20.webm
+se87d6yxEOA_10.webm
+sfAvvZwdLCY_20.m4a
+shmR4OZtzqA_30.webm
+siJFXfGWgDk_50.wav
+sjlVMgdGSK0_30.webm
+skd2PphS6oI_190.webm
+smDKStoHBJo_0.wav
+smGI3C1N_Zc_30.wav
+snFy48Lv3r8_30.m4a
+sncRqQ67iJU_460.webm
+soTOh3zYJfY_40.m4a
+sofxkNWaP0s_30.m4a
+spJCm8tD9Zo_90.wav
+spYNpeN7rPY_1.webm
+sxIvBMSavMQ_210.m4a
+sxYkFKFIZD0_20.m4a
+syyyCQcHSfQ_60.webm
+t25U-v4k4ts_40.m4a
+t5ZbXbniOWk_30.m4a
+t69a8aRKhmc_30.m4a
+t8CV69hcvF0_210.m4a
+t8tv5YRMJUg_0.webm
+t97k0cejSQE_250.wav
+tB7hWb9gTuQ_30.wav
+tDVADusiIoc_60.wav
+tDlfY3nmx1A_160.webm
+tDlysoZiA1I_0.wav
+tEE3MpBt1sg_50.webm
+tFCUUGdREgA_70.m4a
+tG_cFnX0GHI_0.wav
+tH17JPjDPnc_260.wav
+tHyNqRyK34A_24.m4a
+tIY7qOV3rEM_0.m4a
+tK4VlLsNxak_120.m4a
+tMJne1a4AFI_0.wav
+tOS_WIURC-4_0.webm
+tPJvjq9QePY_40.m4a
+tQWGZLItBXk_170.m4a
+tZGN5a7ybxo_60.m4a
+tcd9QCdjTI0_40.m4a
+tdWhHV3X25Q_60.wav
+tezvROoo4bs_40.wav
+tgbONvsP47Y_0.wav
+ti_DFTC-5vU_30.wav
+tjmoSi330GM_23.webm
+tqR406bGi_E_40.webm
+tvP4E1r7yk8_120.webm
+tw76HGONaKg_570.wav
+u--KhUW8l1Y_0.m4a
+u0T_rcHhkPQ_20.wav
+u21-Z5gJCB8_30.webm
+u2f5NpsoHBg_30.m4a
+u5RmF3c3_Aw_60.m4a
+u6BnG6YZqJ4_0.wav
+u6jIvCtKarQ_70.webm
+u7C-_AEBQ_M_30.webm
+u9A6VZQCZpU_30.webm
+uC9dtII1KDI_150.m4a
+uEU-Hg5MTN8_27.wav
+uFoga8sHpiw_90.m4a
+uJV8NDaHqqk_100.webm
+uJe1Gvp-MeM_40.webm
+uK5doE8g_nY_80.m4a
+uKCSGgof8gI_12.m4a
+uMT_TDZ2mb4_30.webm
+uOpoD0gGXcs_120.m4a
+uP_Dn2BFTHk_140.webm
+uRExseg-0XI_210.webm
+uRlbY6_aoBU_0.webm
+uWAAAL4CIoc_0.wav
+uWPRNLnpy7Y_10.wav
+uXxVebHsGZ8_30.webm
+uYT5gxnyMWM_50.wav
+uZesmtKZGSw_250.wav
+ucQikcv96gM_150.m4a
+ugHJF0hfYkg_10.wav
+uiItxDsDMFI_30.m4a
+uiS58TNyUiw_430.wav
+ujMt0-D-x2k_0.webm
+ukg5L09Wpvo_150.wav
+ukxt9I7eMMg_30.m4a
+ul60S8TXDA8_60.webm
+un9VQ_lzgZM_5.m4a
+uoGVs9yUqY4_30.webm
+uqFtmnhuqA8_30.webm
+uyRfq-jKPpo_50.wav
+uzQnlJXBbOM_50.webm
+v-g-j2uTByM_30.wav
+v-wcQf4BDY0_120.wav
+v0wPrLBI3hg_30.m4a
+v0x1odnXtP0_210.wav
+v25l1jef3JY_0.wav
+v5P-ThUCINM_400.webm
+v5cSxLaHADY_0.wav
+v5tqYBzowxI_4.wav
+v7jJ_S8aAyA_10.webm
+vBHyYJ8p_L0_2.m4a
+vBslzh7saPw_90.m4a
+vD6lYD1l0BY_330.webm
+vGj1XLJvNrw_0.webm
+vH4z5OI5aNY_30.wav
+vJ7JPEFhyLA_16.wav
+vJrjSeP17yE_40.webm
+vJvryTwuAV8_16.wav
+vK93VuO0yNc_30.webm
+vKrYfzleLB8_110.webm
+vMDHu7Lxcgw_410.m4a
+vMf1dLD6Sng_6.m4a
+vSeGhaZt-aI_50.wav
+vVhthZ45k3Y_30.m4a
+vW4x7S1VfQc_150.webm
+vXlk0lIQBFo_470.webm
+vYkA3cfXp5Q_30.wav
+vZAqdHZ81yA_180.m4a
+vZAw4apG0Es_30.wav
+vZInq2uXuEo_510.m4a
+vaX_J_G3638_130.webm
+vb1fPSD_I4c_30.wav
+vbZ-0lGPneg_30.wav
+vbpKkWvfOu4_560.wav
+vbr9mHKc8WM_40.m4a
+vcmWS_mvti8_30.m4a
+vdoxuJn9lTc_40.webm
+vf44CgrjT0A_20.webm
+vf9xf3vMsGM_540.m4a
+vfY_TJq7n_U_130.wav
+vh30P49Po6s_30.wav
+vhJWZhe_qaE_0.webm
+vimzuGQvdcU_30.m4a
+viuTg1M-dqg_30.wav
+vlJS7LN2XyM_30.m4a
+vlS6YMeWAPo_40.wav
+vmrxwuAMb2I_40.m4a
+vms5XGTDVQc_220.webm
+voJh2gJxXhA_50.webm
+vqZuVbG6-HI_130.wav
+vr8ZXjEBhMQ_150.wav
+vs65y4qmyBE_340.webm
+vuUVPzd2FXw_160.webm
+vveS8HT7Uog_100.m4a
+vwqaIHKxLvM_20.webm
+vx1gfpZnjAM_30.m4a
+vzceMbkl_Wc_180.wav
+vzxHnu-SFEw_80.wav
+w-4gHptFNuU_21.webm
+w0xsN8_X18Y_30.webm
+w1ir-sZ3Im8_90.wav
+w1mlz3Pe4fU_300.m4a
+w2JXXIAdUdg_10.m4a
+w2M4i1mklOA_30.m4a
+w2bYrCVLT60_120.webm
+w34HjHr6gAY_30.wav
+w5W_5Kqtc8E_100.wav
+w6RTHR6AeAg_40.webm
+w8uLijTqtlU_70.webm
+w9lpbUn0hPc_30.m4a
+wDVMhEdTiVw_30.wav
+wEBlkGWVWwE_260.m4a
+wGKgwOP3h30_30.webm
+wIJK3-5y0kA_30.wav
+wIvYjuR3nrg_9.webm
+wNZ5thZM7XU_20.webm
+wP8ZKrlx3oA_40.m4a
+wPz6QRAkEb4_60.m4a
+wRBHTgrbiwg_50.webm
+wRV8yMk886E_0.m4a
+wSV_hSdj0F0_10.wav
+wTideSjRFS0_30.wav
+wTjoRj1se3U_390.wav
+w_AAkbZToh8_0.m4a
+wbHTKEJZyhc_20.webm
+wdXV3Pv0jiY_11.m4a
+weDbePuc-Xc_40.webm
+wfHeoPDLMaM_30.m4a
+wjsXBsc7M40_10.m4a
+wnNNcxAPwGQ_0.m4a
+wnpJndXuxLc_50.webm
+wob-3S4VjMs_140.webm.part
+wqADXCzngMw_340.wav
+wqN6IIHw3po_30.webm
+wqUmIEzuNz4_30.webm
+wqZ135_Ssz0_60.wav
+wsHBIgzs9Fs_50.m4a
+wtDqrBygTcU_30.webm
+wudZTNBtVqc_60.webm
+wulOEFdECWs_10.m4a
+wvKpEYswXO0_150.wav
+wy1eKjR7KC0_30.m4a
+wyllXV6PjKo_30.webm
+wz7N8YRy74I_30.wav
+wz_tCSUxOf8_130.wav
+x-PeY8Yb8M4_300.wav
+x4a9YGIw4ok_120.m4a
+x4dZyf9Gbj0_130.m4a
+x5cuQjOdM3E_30.wav
+x5eIC7S0fbg_60.m4a
+x6iCUDmRpKQ_38.webm
+x6ijhqRY38s_250.webm
+x9J_ovgqUcs_500.wav
+xBxDz0CFVn0_30.wav
+xC8kbrKJmco_0.webm
+xERFUeZONz8_0.m4a
+xJSVJj-v8EE_10.webm
+xKB8O8LTs6s_70.wav
+xM4joTqDVp4_160.m4a
+xMXvkIcaG0Y_30.webm
+xNMovAf3o50_0.m4a
+xO-Q2BlIIPU_30.webm
+xOZfdgAgJ9o_40.wav
+xPiVrZL4qek_10.webm
+xSKJGCItUWE_10.m4a
+xSN_cBFt-PI_30.m4a
+xV7Mg1QucSc_14.wav
+xZepNM9qcRA_30.wav
+x_l2PIWyXaM_160.wav
+xfaoyyzw2WU_180.wav
+xfudFO976zE_0.webm
+xhmRY9yhC7c_20.wav
+xjhAnI2q6hM_6.wav
+xjvTpk2Zpr8_70.wav
+xmiUIOhtZyQ_60.wav
+xtWeJ56-U-g_20.m4a
+xvDdE3zNf8Y_120.wav
+xw5cmiqbaUg_160.webm
+xyL9F5VrjkE_20.webm
+xyx6eNVEYRY_380.webm
+xzKKf9bKNUo_10.webm
+y1saVTXsKwc_80.webm
+y2ZBGpgbhHM_30.wav
+y2bVZ7rz-5M_280.wav
+y4MY9mp8-TA_30.m4a
+y4tPJXBKDig_20.m4a
+y5WII6cTH7k_40.m4a
+y636gklDioE_20.webm
+y682ml90jGw_11.wav
+y8WEcpOlT3I_40.wav
+y8dSeubCN_I_4.m4a
+yDoT73BWsdA_10.wav
+yFB25fqfU8I_300.wav
+yHeVV-xeOxQ_130.m4a
+yI-KvObbDoY_260.webm
+yJ0T_ePmaOo_390.webm
+yLCORCnd35Q_0.m4a
+yLy-WycbVVE_30.webm
+yNtRmrn0io8_210.webm
+
+[2026-05-21T02:02:09.978282] END Check Files (exit=0, elapsed=0.0s)
+
+================================================================================
+[2026-05-21T02:02:09.978450] START Extract LAION AudioCaps
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+================================================================================
+cache exists: /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/audiocaps__val.npz (use --force to overwrite)
+
+[2026-05-21T02:02:11.087765] END Extract LAION AudioCaps (exit=0, elapsed=1.1s)
+
+================================================================================
+[2026-05-21T02:02:11.087866] START Extract LAION ESC-50
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+================================================================================
+cache exists: /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/esc50.npz (use --force to overwrite)
+
+[2026-05-21T02:02:12.208194] END Extract LAION ESC-50 (exit=0, elapsed=1.1s)
+
+================================================================================
+[2026-05-21T02:02:12.208301] START Continual Dry Run LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold 1 --dry-run
+================================================================================
+MG-CLAP-lite results written to /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap/laion/dry_run
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T02:02:15.692131] END Continual Dry Run LAION (exit=0, elapsed=3.5s)
+### Pipeline run finished 2026-05-21T02:02:15.692230 ###
+
+
+### Pipeline run started 2026-05-21T02:18:21.148202 ###
+
+================================================================================
+[2026-05-21T02:18:21.148229] START Check Files
+COMMAND: ls -R embeddings data results | head -300
+================================================================================
+data:
+audiocaps
+esc50
+
+data/audiocaps:
+audio
+csv
+
+data/audiocaps/audio:
+val
+
+data/audiocaps/audio/val:
+rqfQRErjfk8_170.webm
+rqu8iB22I_Y_5.wav
+rwT__ERCUno_90.m4a
+rwtmaKiCcQU_30.m4a
+ryFDPxgDOGc_570.wav
+s3cT_DAj31g_80.webm
+s4tUs779vBA_160.m4a
+s4Uz1Ffgo04_100.webm
+s59PfAghdkM_0.webm
+s6DESzUTGjY_16.wav
+s7knHCFW82w_30.m4a
+sa6TLVbooCc_240.m4a
+sAam2NqGhLY_20.m4a
+s_apQIQUhFc_280.webm
+sCeWURVHfOM_30.m4a
+sC_i_y7QS1U_300.wav
+scYRUkrFLiQ_30.m4a
+sd7x_Vssqlw_50.webm
+sDSppXIlJrs_27.m4a
+sdv_I1mHAsc_20.webm
+sd_XV-ylviw_190.wav
+se87d6yxEOA_10.webm
+sEprKHm8Sj8_90.m4a
+sfAvvZwdLCY_20.m4a
+sG7TyPnFDR0_180.m4a
+sGgBtiZY0U8_30.webm
+sHbXC6na9hg_0.m4a
+shmR4OZtzqA_30.webm
+siJFXfGWgDk_50.wav
+sIXTftIuUgw_90.wav
+sjlVMgdGSK0_30.webm
+sK4u5T8hW78_30.wav
+skd2PphS6oI_190.webm
+sLkeqCDJIyw_120.wav
+sLUnaPT5gM8_0.wav
+smDKStoHBJo_0.wav
+smGI3C1N_Zc_30.wav
+sNB8zxXneIM_20.webm
+sncRqQ67iJU_460.webm
+snFy48Lv3r8_30.m4a
+sOa7g-44Dag_30.m4a
+sofxkNWaP0s_30.m4a
+soTOh3zYJfY_40.m4a
+spJCm8tD9Zo_90.wav
+spYNpeN7rPY_1.webm
+sQGXqGcwOTc_3.wav
+sQwlkXjQabo_10.wav
+sShpyu2l4YQ_0.webm
+sSMl2vc3e_k_20.wav
+s-T9OVOiMLo_330.wav
+sTpirNYo8vQ_30.m4a
+sU53zg9Jp7s_380.webm
+sUVVjE3Ucp8_0.webm
+sW_ZzX_uWYY_420.webm
+sxIvBMSavMQ_210.m4a
+sxYkFKFIZD0_20.m4a
+sYITalLZjj4_30.webm
+syyyCQcHSfQ_60.webm
+sZPuqDgX2V0_30.m4a
+sZvwOuuPGP0_50.wav
+t25U-v4k4ts_40.m4a
+t5ZbXbniOWk_30.m4a
+t69a8aRKhmc_30.m4a
+t8CV69hcvF0_210.m4a
+t8tv5YRMJUg_0.webm
+t97k0cejSQE_250.wav
+tB7hWb9gTuQ_30.wav
+tcd9QCdjTI0_40.m4a
+tDlfY3nmx1A_160.webm
+tDlysoZiA1I_0.wav
+tDVADusiIoc_60.wav
+tdWhHV3X25Q_60.wav
+tEE3MpBt1sg_50.webm
+tezvROoo4bs_40.wav
+tFCUUGdREgA_70.m4a
+tgbONvsP47Y_0.wav
+tG_cFnX0GHI_0.wav
+tH17JPjDPnc_260.wav
+tHyNqRyK34A_24.m4a
+ti_DFTC-5vU_30.wav
+tIY7qOV3rEM_0.m4a
+tjmoSi330GM_23.webm
+tK4VlLsNxak_120.m4a
+tMJne1a4AFI_0.wav
+tOS_WIURC-4_0.webm
+tPJvjq9QePY_40.m4a
+tqR406bGi_E_40.webm
+tQWGZLItBXk_170.m4a
+tvP4E1r7yk8_120.webm
+tw76HGONaKg_570.wav
+tZGN5a7ybxo_60.m4a
+u0T_rcHhkPQ_20.wav
+u21-Z5gJCB8_30.webm
+u2f5NpsoHBg_30.m4a
+u5RmF3c3_Aw_60.m4a
+u6BnG6YZqJ4_0.wav
+u6jIvCtKarQ_70.webm
+u7C-_AEBQ_M_30.webm
+u9A6VZQCZpU_30.webm
+uC9dtII1KDI_150.m4a
+ucQikcv96gM_150.m4a
+uEU-Hg5MTN8_27.wav
+uFoga8sHpiw_90.m4a
+ugHJF0hfYkg_10.wav
+uiItxDsDMFI_30.m4a
+uiS58TNyUiw_430.wav
+uJe1Gvp-MeM_40.webm
+ujMt0-D-x2k_0.webm
+uJV8NDaHqqk_100.webm
+uK5doE8g_nY_80.m4a
+uKCSGgof8gI_12.m4a
+ukg5L09Wpvo_150.wav
+u--KhUW8l1Y_0.m4a
+ukxt9I7eMMg_30.m4a
+ul60S8TXDA8_60.webm
+uMT_TDZ2mb4_30.webm
+un9VQ_lzgZM_5.m4a
+uoGVs9yUqY4_30.webm
+uOpoD0gGXcs_120.m4a
+uP_Dn2BFTHk_140.webm
+uqFtmnhuqA8_30.webm
+uRExseg-0XI_210.webm
+uRlbY6_aoBU_0.webm
+uWAAAL4CIoc_0.wav
+uWPRNLnpy7Y_10.wav
+uXxVebHsGZ8_30.webm
+uyRfq-jKPpo_50.wav
+uYT5gxnyMWM_50.wav
+uZesmtKZGSw_250.wav
+uzQnlJXBbOM_50.webm
+v0wPrLBI3hg_30.m4a
+v0x1odnXtP0_210.wav
+v25l1jef3JY_0.wav
+v5cSxLaHADY_0.wav
+v5P-ThUCINM_400.webm
+v5tqYBzowxI_4.wav
+v7jJ_S8aAyA_10.webm
+vaX_J_G3638_130.webm
+vb1fPSD_I4c_30.wav
+vBHyYJ8p_L0_2.m4a
+vbpKkWvfOu4_560.wav
+vbr9mHKc8WM_40.m4a
+vBslzh7saPw_90.m4a
+vbZ-0lGPneg_30.wav
+vcmWS_mvti8_30.m4a
+vD6lYD1l0BY_330.webm
+vdoxuJn9lTc_40.webm
+vf44CgrjT0A_20.webm
+vf9xf3vMsGM_540.m4a
+vfY_TJq7n_U_130.wav
+vGj1XLJvNrw_0.webm
+v-g-j2uTByM_30.wav
+vh30P49Po6s_30.wav
+vH4z5OI5aNY_30.wav
+vhJWZhe_qaE_0.webm
+vimzuGQvdcU_30.m4a
+viuTg1M-dqg_30.wav
+vJ7JPEFhyLA_16.wav
+vJrjSeP17yE_40.webm
+vJvryTwuAV8_16.wav
+vK93VuO0yNc_30.webm
+vKrYfzleLB8_110.webm
+vlJS7LN2XyM_30.m4a
+vlS6YMeWAPo_40.wav
+vMDHu7Lxcgw_410.m4a
+vMf1dLD6Sng_6.m4a
+vmrxwuAMb2I_40.m4a
+vms5XGTDVQc_220.webm
+voJh2gJxXhA_50.webm
+vqZuVbG6-HI_130.wav
+vr8ZXjEBhMQ_150.wav
+vs65y4qmyBE_340.webm
+vSeGhaZt-aI_50.wav
+vuUVPzd2FXw_160.webm
+vveS8HT7Uog_100.m4a
+vVhthZ45k3Y_30.m4a
+vW4x7S1VfQc_150.webm
+v-wcQf4BDY0_120.wav
+vwqaIHKxLvM_20.webm
+vx1gfpZnjAM_30.m4a
+vXlk0lIQBFo_470.webm
+vYkA3cfXp5Q_30.wav
+vZAqdHZ81yA_180.m4a
+vZAw4apG0Es_30.wav
+vzceMbkl_Wc_180.wav
+vZInq2uXuEo_510.m4a
+vzxHnu-SFEw_80.wav
+w0xsN8_X18Y_30.webm
+w1ir-sZ3Im8_90.wav
+w1mlz3Pe4fU_300.m4a
+w2bYrCVLT60_120.webm
+w2JXXIAdUdg_10.m4a
+w2M4i1mklOA_30.m4a
+w34HjHr6gAY_30.wav
+w-4gHptFNuU_21.webm
+w5W_5Kqtc8E_100.wav
+w6RTHR6AeAg_40.webm
+w8uLijTqtlU_70.webm
+w9lpbUn0hPc_30.m4a
+w_AAkbZToh8_0.m4a
+wbHTKEJZyhc_20.webm
+wDVMhEdTiVw_30.wav
+wdXV3Pv0jiY_11.m4a
+wEBlkGWVWwE_260.m4a
+weDbePuc-Xc_40.webm
+wfHeoPDLMaM_30.m4a
+wGKgwOP3h30_30.webm
+wIJK3-5y0kA_30.wav
+wIvYjuR3nrg_9.webm
+wjsXBsc7M40_10.m4a
+wnNNcxAPwGQ_0.m4a
+wnpJndXuxLc_50.webm
+wNZ5thZM7XU_20.webm
+wob-3S4VjMs_140.webm.part
+wP8ZKrlx3oA_40.m4a
+wPz6QRAkEb4_60.m4a
+wqADXCzngMw_340.wav
+wqN6IIHw3po_30.webm
+wqUmIEzuNz4_30.webm
+wqZ135_Ssz0_60.wav
+wRBHTgrbiwg_50.webm
+wRV8yMk886E_0.m4a
+wsHBIgzs9Fs_50.m4a
+wSV_hSdj0F0_10.wav
+wtDqrBygTcU_30.webm
+wTideSjRFS0_30.wav
+wTjoRj1se3U_390.wav
+wudZTNBtVqc_60.webm
+wulOEFdECWs_10.m4a
+wvKpEYswXO0_150.wav
+wy1eKjR7KC0_30.m4a
+wyllXV6PjKo_30.webm
+wz7N8YRy74I_30.wav
+wz_tCSUxOf8_130.wav
+x4a9YGIw4ok_120.m4a
+x4dZyf9Gbj0_130.m4a
+x5cuQjOdM3E_30.wav
+x5eIC7S0fbg_60.m4a
+x6iCUDmRpKQ_38.webm
+x6ijhqRY38s_250.webm
+x9J_ovgqUcs_500.wav
+xBxDz0CFVn0_30.wav
+xC8kbrKJmco_0.webm
+xERFUeZONz8_0.m4a
+xfaoyyzw2WU_180.wav
+xfudFO976zE_0.webm
+xhmRY9yhC7c_20.wav
+xjhAnI2q6hM_6.wav
+xJSVJj-v8EE_10.webm
+xjvTpk2Zpr8_70.wav
+xKB8O8LTs6s_70.wav
+x_l2PIWyXaM_160.wav
+xM4joTqDVp4_160.m4a
+xmiUIOhtZyQ_60.wav
+xMXvkIcaG0Y_30.webm
+xNMovAf3o50_0.m4a
+xO-Q2BlIIPU_30.webm
+xOZfdgAgJ9o_40.wav
+x-PeY8Yb8M4_300.wav
+xPiVrZL4qek_10.webm
+xSKJGCItUWE_10.m4a
+xSN_cBFt-PI_30.m4a
+xtWeJ56-U-g_20.m4a
+xV7Mg1QucSc_14.wav
+xvDdE3zNf8Y_120.wav
+xw5cmiqbaUg_160.webm
+xyL9F5VrjkE_20.webm
+xyx6eNVEYRY_380.webm
+xZepNM9qcRA_30.wav
+xzKKf9bKNUo_10.webm
+y1saVTXsKwc_80.webm
+y2bVZ7rz-5M_280.wav
+y2ZBGpgbhHM_30.wav
+y4MY9mp8-TA_30.m4a
+y4tPJXBKDig_20.m4a
+y5WII6cTH7k_40.m4a
+y636gklDioE_20.webm
+y682ml90jGw_11.wav
+y8dSeubCN_I_4.m4a
+y8WEcpOlT3I_40.wav
+yajyRTUQk3U_400.wav
+yaln9y8I7ms_230.wav
+yDoT73BWsdA_10.wav
+yeFvk9x0wWI_30.wav
+yFB25fqfU8I_300.wav
+yHeVV-xeOxQ_130.m4a
+yhQ2Lg-7qDY_130.wav
+yI-KvObbDoY_260.webm
+
+[2026-05-21T02:18:21.156854] END Check Files (exit=0, elapsed=0.0s)
+
+================================================================================
+[2026-05-21T02:18:21.157004] START Extract LAION AudioCaps
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+================================================================================
+cache exists: /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/audiocaps__val.npz (use --force to overwrite)
+
+[2026-05-21T02:18:22.253136] END Extract LAION AudioCaps (exit=0, elapsed=1.1s)
+
+================================================================================
+[2026-05-21T02:18:22.253299] START Extract LAION ESC-50
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+================================================================================
+cache exists: /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/esc50.npz (use --force to overwrite)
+
+[2026-05-21T02:18:23.325774] END Extract LAION ESC-50 (exit=0, elapsed=1.1s)
+
+================================================================================
+[2026-05-21T02:18:23.325926] START Continual Dry Run LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold 1 --dry-run
+================================================================================
+MG-CLAP-lite results written to /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap/laion/dry_run
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T02:18:26.756100] END Continual Dry Run LAION (exit=0, elapsed=3.4s)
+
+================================================================================
+[2026-05-21T02:18:26.756242] START Continual Full LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 0 1 2 4 8 --seed 0
+================================================================================
+MG-CLAP-lite results written to /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T02:18:53.138552] END Continual Full LAION (exit=0, elapsed=26.4s)
+
+================================================================================
+[2026-05-21T02:18:53.138710] START Real Shift LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/run.py --mode shift --backbone laion
+================================================================================
+AudioCaps val: 590 pairs, dim=512
+ESC-50: 2000 clips, 50 class prompts
+||Δ_audiocaps|| = 0.4600
+baseline ESC-50 acc per fold: [0.843, 0.82, 0.828, 0.838, 0.828]  mean=0.8310
+  λ=-1.000  gap=1.246  acc=0.7760
+  λ=-0.900  gap=1.202  acc=0.7830
+  λ=-0.800  gap=1.156  acc=0.7875
+  λ=-0.700  gap=1.108  acc=0.7960
+  λ=-0.600  gap=1.058  acc=0.8000
+  λ=-0.500  gap=1.007  acc=0.8005
+  λ=-0.400  gap=0.955  acc=0.8070
+  λ=-0.300  gap=0.904  acc=0.8125
+  λ=-0.200  gap=0.853  acc=0.8220
+  λ=-0.100  gap=0.804  acc=0.8250
+  λ=+0.000  gap=0.760  acc=0.8310
+  λ=+0.100  gap=0.720  acc=0.8345
+  λ=+0.200  gap=0.688  acc=0.8400
+  λ=+0.300  gap=0.666  acc=0.8465
+  λ=+0.400  gap=0.654  acc=0.8485
+  λ=+0.500  gap=0.654  acc=0.8515
+  λ=+0.600  gap=0.666  acc=0.8550
+  λ=+0.700  gap=0.689  acc=0.8540
+  λ=+0.800  gap=0.721  acc=0.8545
+  λ=+0.900  gap=0.760  acc=0.8535
+  λ=+1.000  gap=0.805  acc=0.8505
+
+results under /home/rwik/leiden_projects/MG-CLAP/results/table_1/laion-shift
+
+[2026-05-21T02:18:54.899657] END Real Shift LAION (exit=0, elapsed=1.8s)
+
+================================================================================
+[2026-05-21T02:18:54.899939] START Real Figure 3 LAION
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python figure_3_contrastive_learning/run.py --backbone laion --real
+================================================================================
+[real] using laion on AudioCaps val (590 pairs)
+
+[3a] gap stats:
+{
+  "n_pairs": 590,
+  "embed_dim": 512,
+  "gap_distance": 0.4599620492965884,
+  "audio_centroid_norm": 0.3971949574914662,
+  "text_centroid_norm": 0.3584589358892256,
+  "delta_top5_axes": [
+    450,
+    494,
+    126,
+    143,
+    504
+  ],
+  "delta_top5_magnitudes": [
+    0.0678917401719963,
+    0.06448226948904462,
+    0.06008960291368329,
+    0.05294974577683684,
+    0.05175358050469317
+  ]
+}
+
+[3b] sweeping loss landscape...
+  τ=0.01  argmin gap=0.852  loss=5.470
+  τ=0.02  argmin gap=0.852  loss=3.504
+  τ=0.03333  argmin gap=0.627  loss=2.883
+  τ=0.05  argmin gap=0.327  loss=2.684
+  τ=0.1  argmin gap=0.051  loss=3.018
+  τ=1  argmin gap=0.007  loss=5.876
+
+[3c] 3D-sphere snapshots at λ=[-0.25, 0.0, 0.25, 0.5]
+
+[3d] optimizing λ under InfoNCE...
+  τ=0.01  final gap=1.825  final loss=2.847
+  τ=0.02  final gap=1.617  final loss=2.908
+  τ=0.03333  final gap=0.592  final loss=2.883
+  τ=0.05  final gap=0.312  final loss=2.684
+  τ=0.1  final gap=0.057  final loss=3.018
+  τ=1  final gap=0.046  final loss=5.877
+
+results under /home/rwik/leiden_projects/MG-CLAP/results/figure_3/laion-audiocaps-val
+
+[2026-05-21T02:20:04.887247] END Real Figure 3 LAION (exit=0, elapsed=70.0s)
+
+================================================================================
+[2026-05-21T02:20:04.887408] START Summarize Project
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/summarize_mgclap_project.py
+================================================================================
+Wrote /home/rwik/leiden_projects/MG-CLAP/results/PROJECT_STATUS.md
+Wrote /home/rwik/leiden_projects/MG-CLAP/results/PROJECT_STATUS.json
+
+[2026-05-21T02:20:05.999598] END Summarize Project (exit=0, elapsed=1.1s)
+### Pipeline run finished 2026-05-21T02:20:05.999797 ###
+
+
+### Pipeline run started 2026-05-21T02:51:23.007727 ###
+
+================================================================================
+[2026-05-21T02:51:23.007775] START Check Files
+COMMAND: ls -R embeddings data results | head -300
+================================================================================
+data:
+audiocaps
+esc50
+
+data/audiocaps:
+audio
+csv
+
+data/audiocaps/audio:
+val
+
+data/audiocaps/audio/val:
+rqfQRErjfk8_170.webm
+rqu8iB22I_Y_5.wav
+rwT__ERCUno_90.m4a
+rwtmaKiCcQU_30.m4a
+ryFDPxgDOGc_570.wav
+s3cT_DAj31g_80.webm
+s4tUs779vBA_160.m4a
+s4Uz1Ffgo04_100.webm
+s59PfAghdkM_0.webm
+s6DESzUTGjY_16.wav
+s7knHCFW82w_30.m4a
+sa6TLVbooCc_240.m4a
+sAam2NqGhLY_20.m4a
+s_apQIQUhFc_280.webm
+sCeWURVHfOM_30.m4a
+sC_i_y7QS1U_300.wav
+scYRUkrFLiQ_30.m4a
+sd7x_Vssqlw_50.webm
+sDSppXIlJrs_27.m4a
+sdv_I1mHAsc_20.webm
+sd_XV-ylviw_190.wav
+se87d6yxEOA_10.webm
+sEprKHm8Sj8_90.m4a
+sfAvvZwdLCY_20.m4a
+sG7TyPnFDR0_180.m4a
+sGgBtiZY0U8_30.webm
+sHbXC6na9hg_0.m4a
+shmR4OZtzqA_30.webm
+siJFXfGWgDk_50.wav
+sIXTftIuUgw_90.wav
+sjlVMgdGSK0_30.webm
+sK4u5T8hW78_30.wav
+skd2PphS6oI_190.webm
+sLkeqCDJIyw_120.wav
+sLUnaPT5gM8_0.wav
+smDKStoHBJo_0.wav
+smGI3C1N_Zc_30.wav
+sNB8zxXneIM_20.webm
+sncRqQ67iJU_460.webm
+snFy48Lv3r8_30.m4a
+sOa7g-44Dag_30.m4a
+sofxkNWaP0s_30.m4a
+soTOh3zYJfY_40.m4a
+spJCm8tD9Zo_90.wav
+spYNpeN7rPY_1.webm
+sQGXqGcwOTc_3.wav
+sQwlkXjQabo_10.wav
+sShpyu2l4YQ_0.webm
+sSMl2vc3e_k_20.wav
+s-T9OVOiMLo_330.wav
+sTpirNYo8vQ_30.m4a
+sU53zg9Jp7s_380.webm
+sUVVjE3Ucp8_0.webm
+sW_ZzX_uWYY_420.webm
+sxIvBMSavMQ_210.m4a
+sxYkFKFIZD0_20.m4a
+sYITalLZjj4_30.webm
+syyyCQcHSfQ_60.webm
+sZPuqDgX2V0_30.m4a
+sZvwOuuPGP0_50.wav
+t25U-v4k4ts_40.m4a
+t5ZbXbniOWk_30.m4a
+t69a8aRKhmc_30.m4a
+t8CV69hcvF0_210.m4a
+t8tv5YRMJUg_0.webm
+t97k0cejSQE_250.wav
+tB7hWb9gTuQ_30.wav
+tcd9QCdjTI0_40.m4a
+tDlfY3nmx1A_160.webm
+tDlysoZiA1I_0.wav
+tDVADusiIoc_60.wav
+tdWhHV3X25Q_60.wav
+tEE3MpBt1sg_50.webm
+tezvROoo4bs_40.wav
+tFCUUGdREgA_70.m4a
+tgbONvsP47Y_0.wav
+tG_cFnX0GHI_0.wav
+tH17JPjDPnc_260.wav
+tHyNqRyK34A_24.m4a
+ti_DFTC-5vU_30.wav
+tIY7qOV3rEM_0.m4a
+tjmoSi330GM_23.webm
+tK4VlLsNxak_120.m4a
+tMJne1a4AFI_0.wav
+tOS_WIURC-4_0.webm
+tPJvjq9QePY_40.m4a
+tqR406bGi_E_40.webm
+tQWGZLItBXk_170.m4a
+tvP4E1r7yk8_120.webm
+tw76HGONaKg_570.wav
+tZGN5a7ybxo_60.m4a
+u0T_rcHhkPQ_20.wav
+u21-Z5gJCB8_30.webm
+u2f5NpsoHBg_30.m4a
+u5RmF3c3_Aw_60.m4a
+u6BnG6YZqJ4_0.wav
+u6jIvCtKarQ_70.webm
+u7C-_AEBQ_M_30.webm
+u9A6VZQCZpU_30.webm
+uC9dtII1KDI_150.m4a
+ucQikcv96gM_150.m4a
+uEU-Hg5MTN8_27.wav
+uFoga8sHpiw_90.m4a
+ugHJF0hfYkg_10.wav
+uiItxDsDMFI_30.m4a
+uiS58TNyUiw_430.wav
+uJe1Gvp-MeM_40.webm
+ujMt0-D-x2k_0.webm
+uJV8NDaHqqk_100.webm
+uK5doE8g_nY_80.m4a
+uKCSGgof8gI_12.m4a
+ukg5L09Wpvo_150.wav
+u--KhUW8l1Y_0.m4a
+ukxt9I7eMMg_30.m4a
+ul60S8TXDA8_60.webm
+uMT_TDZ2mb4_30.webm
+un9VQ_lzgZM_5.m4a
+uoGVs9yUqY4_30.webm
+uOpoD0gGXcs_120.m4a
+uP_Dn2BFTHk_140.webm
+uqFtmnhuqA8_30.webm
+uRExseg-0XI_210.webm
+uRlbY6_aoBU_0.webm
+uWAAAL4CIoc_0.wav
+uWPRNLnpy7Y_10.wav
+uXxVebHsGZ8_30.webm
+uyRfq-jKPpo_50.wav
+uYT5gxnyMWM_50.wav
+uZesmtKZGSw_250.wav
+uzQnlJXBbOM_50.webm
+v0wPrLBI3hg_30.m4a
+v0x1odnXtP0_210.wav
+v25l1jef3JY_0.wav
+v5cSxLaHADY_0.wav
+v5P-ThUCINM_400.webm
+v5tqYBzowxI_4.wav
+v7jJ_S8aAyA_10.webm
+vaX_J_G3638_130.webm
+vb1fPSD_I4c_30.wav
+vBHyYJ8p_L0_2.m4a
+vbpKkWvfOu4_560.wav
+vbr9mHKc8WM_40.m4a
+vBslzh7saPw_90.m4a
+vbZ-0lGPneg_30.wav
+vcmWS_mvti8_30.m4a
+vD6lYD1l0BY_330.webm
+vdoxuJn9lTc_40.webm
+vf44CgrjT0A_20.webm
+vf9xf3vMsGM_540.m4a
+vfY_TJq7n_U_130.wav
+vGj1XLJvNrw_0.webm
+v-g-j2uTByM_30.wav
+vh30P49Po6s_30.wav
+vH4z5OI5aNY_30.wav
+vhJWZhe_qaE_0.webm
+vimzuGQvdcU_30.m4a
+viuTg1M-dqg_30.wav
+vJ7JPEFhyLA_16.wav
+vJrjSeP17yE_40.webm
+vJvryTwuAV8_16.wav
+vK93VuO0yNc_30.webm
+vKrYfzleLB8_110.webm
+vlJS7LN2XyM_30.m4a
+vlS6YMeWAPo_40.wav
+vMDHu7Lxcgw_410.m4a
+vMf1dLD6Sng_6.m4a
+vmrxwuAMb2I_40.m4a
+vms5XGTDVQc_220.webm
+voJh2gJxXhA_50.webm
+vqZuVbG6-HI_130.wav
+vr8ZXjEBhMQ_150.wav
+vs65y4qmyBE_340.webm
+vSeGhaZt-aI_50.wav
+vuUVPzd2FXw_160.webm
+vveS8HT7Uog_100.m4a
+vVhthZ45k3Y_30.m4a
+vW4x7S1VfQc_150.webm
+v-wcQf4BDY0_120.wav
+vwqaIHKxLvM_20.webm
+vx1gfpZnjAM_30.m4a
+vXlk0lIQBFo_470.webm
+vYkA3cfXp5Q_30.wav
+vZAqdHZ81yA_180.m4a
+vZAw4apG0Es_30.wav
+vzceMbkl_Wc_180.wav
+vZInq2uXuEo_510.m4a
+vzxHnu-SFEw_80.wav
+w0xsN8_X18Y_30.webm
+w1ir-sZ3Im8_90.wav
+w1mlz3Pe4fU_300.m4a
+w2bYrCVLT60_120.webm
+w2JXXIAdUdg_10.m4a
+w2M4i1mklOA_30.m4a
+w34HjHr6gAY_30.wav
+w-4gHptFNuU_21.webm
+w5W_5Kqtc8E_100.wav
+w6RTHR6AeAg_40.webm
+w8uLijTqtlU_70.webm
+w9lpbUn0hPc_30.m4a
+w_AAkbZToh8_0.m4a
+wbHTKEJZyhc_20.webm
+wDVMhEdTiVw_30.wav
+wdXV3Pv0jiY_11.m4a
+wEBlkGWVWwE_260.m4a
+weDbePuc-Xc_40.webm
+wfHeoPDLMaM_30.m4a
+wGKgwOP3h30_30.webm
+wIJK3-5y0kA_30.wav
+wIvYjuR3nrg_9.webm
+wjsXBsc7M40_10.m4a
+wnNNcxAPwGQ_0.m4a
+wnpJndXuxLc_50.webm
+wNZ5thZM7XU_20.webm
+wob-3S4VjMs_140.webm.part
+wP8ZKrlx3oA_40.m4a
+wPz6QRAkEb4_60.m4a
+wqADXCzngMw_340.wav
+wqN6IIHw3po_30.webm
+wqUmIEzuNz4_30.webm
+wqZ135_Ssz0_60.wav
+wRBHTgrbiwg_50.webm
+wRV8yMk886E_0.m4a
+wsHBIgzs9Fs_50.m4a
+wSV_hSdj0F0_10.wav
+wtDqrBygTcU_30.webm
+wTideSjRFS0_30.wav
+wTjoRj1se3U_390.wav
+wudZTNBtVqc_60.webm
+wulOEFdECWs_10.m4a
+wvKpEYswXO0_150.wav
+wy1eKjR7KC0_30.m4a
+wyllXV6PjKo_30.webm
+wz7N8YRy74I_30.wav
+wz_tCSUxOf8_130.wav
+x4a9YGIw4ok_120.m4a
+x4dZyf9Gbj0_130.m4a
+x5cuQjOdM3E_30.wav
+x5eIC7S0fbg_60.m4a
+x6iCUDmRpKQ_38.webm
+x6ijhqRY38s_250.webm
+x9J_ovgqUcs_500.wav
+xBxDz0CFVn0_30.wav
+xC8kbrKJmco_0.webm
+xERFUeZONz8_0.m4a
+xfaoyyzw2WU_180.wav
+xfudFO976zE_0.webm
+xhmRY9yhC7c_20.wav
+xjhAnI2q6hM_6.wav
+xJSVJj-v8EE_10.webm
+xjvTpk2Zpr8_70.wav
+xKB8O8LTs6s_70.wav
+x_l2PIWyXaM_160.wav
+xM4joTqDVp4_160.m4a
+xmiUIOhtZyQ_60.wav
+xMXvkIcaG0Y_30.webm
+xNMovAf3o50_0.m4a
+xO-Q2BlIIPU_30.webm
+xOZfdgAgJ9o_40.wav
+x-PeY8Yb8M4_300.wav
+xPiVrZL4qek_10.webm
+xSKJGCItUWE_10.m4a
+xSN_cBFt-PI_30.m4a
+xtWeJ56-U-g_20.m4a
+xV7Mg1QucSc_14.wav
+xvDdE3zNf8Y_120.wav
+xw5cmiqbaUg_160.webm
+xyL9F5VrjkE_20.webm
+xyx6eNVEYRY_380.webm
+xZepNM9qcRA_30.wav
+xzKKf9bKNUo_10.webm
+y1saVTXsKwc_80.webm
+y2bVZ7rz-5M_280.wav
+y2ZBGpgbhHM_30.wav
+y4MY9mp8-TA_30.m4a
+y4tPJXBKDig_20.m4a
+y5WII6cTH7k_40.m4a
+y636gklDioE_20.webm
+y682ml90jGw_11.wav
+y8dSeubCN_I_4.m4a
+y8WEcpOlT3I_40.wav
+yajyRTUQk3U_400.wav
+yaln9y8I7ms_230.wav
+yDoT73BWsdA_10.wav
+yeFvk9x0wWI_30.wav
+yFB25fqfU8I_300.wav
+yHeVV-xeOxQ_130.m4a
+yhQ2Lg-7qDY_130.wav
+yI-KvObbDoY_260.webm
+
+[2026-05-21T02:51:23.017820] END Check Files (exit=0, elapsed=0.0s)
+
+================================================================================
+[2026-05-21T02:51:23.017981] START Extract LAION AudioCaps
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+================================================================================
+cache exists: /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/audiocaps__val.npz (use --force to overwrite)
+
+[2026-05-21T02:51:24.138003] END Extract LAION AudioCaps (exit=0, elapsed=1.1s)
+
+================================================================================
+[2026-05-21T02:51:24.138217] START Extract LAION ESC-50
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+================================================================================
+cache exists: /home/rwik/leiden_projects/MG-CLAP/embeddings/laion/esc50.npz (use --force to overwrite)
+
+[2026-05-21T02:51:25.232670] END Extract LAION ESC-50 (exit=0, elapsed=1.1s)
+
+================================================================================
+[2026-05-21T02:51:25.232850] START Extract MSCLAP AudioCaps
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/01_extract_embeddings.py --backbone msclap --dataset audiocaps --split val
+================================================================================
+loading backbone: msclap
+  info: BackboneInfo(name='msclap-2023', embed_dim=1024, sample_rate=44100, notes='version=2023')
+AudioCaps val: 590 items
+  → validating audio files...
+
+validating audio:   0%|          | 0/590 [00:00<?, ?file/s]
+validating audio: 100%|██████████| 590/590 [00:00<00:00, 27860.03file/s]
+  proceeding with 590 / 590 clips
+  → encoding audio...
+
+encoding audio:   0%|          | 0/590 [00:00<?, ?clip/s]
+encoding audio: 100%|██████████| 590/590 [00:00<00:00, 18437.87clip/s]
+  [skip] 590 files failed to encode (e.g. ImportError: TorchCodec is required for load_with_torchcodec. Please install torchcodec to use this function.)
+    audio: (0, 0), dtype=float64
+  → encoding text...
+Traceback (most recent call last):
+  File "/home/rwik/leiden_projects/MG-CLAP/scripts/01_extract_embeddings.py", line 243, in <module>
+    main()
+  File "/home/rwik/leiden_projects/MG-CLAP/scripts/01_extract_embeddings.py", line 232, in main
+    payload = extract_audiocaps(backbone, args.split)
+  File "/home/rwik/leiden_projects/MG-CLAP/scripts/01_extract_embeddings.py", line 146, in extract_audiocaps
+    text_emb = backbone.encode_text(captions_kept, batch_size=32)
+  File "/home/rwik/leiden_projects/MG-CLAP/lib/clap_models.py", line 273, in encode_text
+    return _maybe_normalize(np.concatenate(out, axis=0), normalize)
+ValueError: need at least one array to concatenate
+
+[2026-05-21T02:52:38.845474] END Extract MSCLAP AudioCaps (exit=1, elapsed=73.6s)

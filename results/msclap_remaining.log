@@ -1,0 +1,105 @@
+================================================================================
+[2026-05-21T03:18:09+05:30] START MSCLAP Continual
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone msclap --fold all --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 0 1 2 4 8 --seed 0
+================================================================================
+MG-CLAP-lite results written to /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap/msclap
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset esc50
+
+[2026-05-21T03:18:35+05:30] END MSCLAP Continual (exit=0)
+
+================================================================================
+[2026-05-21T03:18:35+05:30] START MSCLAP Shift
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/run.py --mode shift --backbone msclap
+================================================================================
+AudioCaps val: 590 pairs, dim=1024
+ESC-50: 2000 clips, 50 class prompts
+||Δ_audiocaps|| = 0.7652
+baseline ESC-50 acc per fold: [0.94, 0.965, 0.932, 0.948, 0.932]  mean=0.9435
+  λ=-1.000  gap=0.670  acc=0.9425
+  λ=-0.900  gap=0.667  acc=0.9430
+  λ=-0.800  gap=0.664  acc=0.9430
+  λ=-0.700  gap=0.661  acc=0.9430
+  λ=-0.600  gap=0.659  acc=0.9430
+  λ=-0.500  gap=0.656  acc=0.9430
+  λ=-0.400  gap=0.653  acc=0.9430
+  λ=-0.300  gap=0.651  acc=0.9430
+  λ=-0.200  gap=0.648  acc=0.9435
+  λ=-0.100  gap=0.646  acc=0.9435
+  λ=+0.000  gap=0.643  acc=0.9435
+  λ=+0.100  gap=0.640  acc=0.9440
+  λ=+0.200  gap=0.638  acc=0.9440
+  λ=+0.300  gap=0.635  acc=0.9440
+  λ=+0.400  gap=0.633  acc=0.9440
+  λ=+0.500  gap=0.630  acc=0.9440
+  λ=+0.600  gap=0.628  acc=0.9440
+  λ=+0.700  gap=0.625  acc=0.9440
+  λ=+0.800  gap=0.623  acc=0.9440
+  λ=+0.900  gap=0.621  acc=0.9440
+  λ=+1.000  gap=0.618  acc=0.9440
+
+results under /home/rwik/leiden_projects/MG-CLAP/results/table_1/msclap-shift
+
+[2026-05-21T03:18:37+05:30] END MSCLAP Shift (exit=0)
+
+================================================================================
+[2026-05-21T03:18:37+05:30] START MSCLAP Figure3 Real
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python figure_3_contrastive_learning/run.py --backbone msclap --real
+================================================================================
+[real] using msclap on AudioCaps val (590 pairs)
+
+[3a] gap stats:
+{
+  "n_pairs": 590,
+  "embed_dim": 1024,
+  "gap_distance": 0.7651656144753478,
+  "audio_centroid_norm": 0.5689616202369682,
+  "text_centroid_norm": 0.6277926505306118,
+  "delta_top5_axes": [
+    648,
+    868,
+    841,
+    272,
+    182
+  ],
+  "delta_top5_magnitudes": [
+    0.10004891001560791,
+    0.09146874416252569,
+    0.08121199036039385,
+    0.07850611917015188,
+    0.07266143433741179
+  ]
+}
+
+[3b] sweeping loss landscape...
+  τ=0.01  argmin gap=1.275  loss=5.023
+  τ=0.02  argmin gap=1.275  loss=3.506
+  τ=0.03333  argmin gap=0.023  loss=3.239
+  τ=0.05  argmin gap=0.023  loss=3.133
+  τ=0.1  argmin gap=0.023  loss=3.775
+  τ=1  argmin gap=0.023  loss=6.036
+
+[3c] 3D-sphere snapshots at λ=[-0.25, 0.0, 0.25, 0.5]
+
+[3d] optimizing λ under InfoNCE...
+  τ=0.01  final gap=0.044  final loss=6.485
+  τ=0.02  final gap=0.040  final loss=3.966
+  τ=0.03333  final gap=0.033  final loss=3.238
+  τ=0.05  final gap=0.023  final loss=3.133
+  τ=0.1  final gap=0.030  final loss=3.775
+  τ=1  final gap=0.026  final loss=6.036
+
+results under /home/rwik/leiden_projects/MG-CLAP/results/figure_3/msclap-audiocaps-val
+
+[2026-05-21T03:19:42+05:30] END MSCLAP Figure3 Real (exit=0)
+
+================================================================================
+[2026-05-21T03:19:42+05:30] START Project Summary
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python scripts/summarize_mgclap_project.py
+================================================================================
+Wrote /home/rwik/leiden_projects/MG-CLAP/results/PROJECT_STATUS.md
+Wrote /home/rwik/leiden_projects/MG-CLAP/results/PROJECT_STATUS.json
+
+[2026-05-21T03:19:43+05:30] END Project Summary (exit=0)
+
