@@ -1,0 +1,523 @@
+{
+  "timestamp": "2026-05-20T22:56:13.183076+00:00",
+  "git_commit": "8f3ff755e36f4c5eff20d8648a34c25e461a3c52",
+  "command": "table_1_zero_shot/continual_mgclap.py --backbone msclap --fold all --seed 2 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order shuffled --out-dir /tmp/mgclap_phase2/main_grid/msclap/seed_2",
+  "args": {
+    "backbone": "msclap",
+    "fold": "all",
+    "seed": 2,
+    "tasks": 10,
+    "classes_per_task": 5,
+    "alpha": 0.1,
+    "adapter_rank": 16,
+    "adapter_scale": 1.0,
+    "epochs_max": 20,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 64,
+    "betas": [
+      4.0
+    ],
+    "temperature": 0.07,
+    "out_dir": "/tmp/mgclap_phase2/main_grid/msclap/seed_2",
+    "device": "auto",
+    "class_order": "shuffled",
+    "dry_run": false,
+    "debug": false
+  },
+  "machine_info": {
+    "hostname": "PROENG93",
+    "platform": "Linux-6.11.0-29-generic-x86_64-with-glibc2.39",
+    "python": "3.10.16 (main, Dec  4 2024, 08:53:38) [GCC 13.2.0]",
+    "executable": "/home/rwik/leiden_projects/MG-CLAP/venv/bin/python",
+    "processor": "x86_64",
+    "pid": 2850988
+  },
+  "torch_info": {
+    "torch_version": "2.12.0+cu130",
+    "cuda_available": true,
+    "mps_available": false
+  },
+  "cache_paths": {
+    "esc50": {
+      "path": "/home/rwik/leiden_projects/MG-CLAP/embeddings/msclap/esc50.npz",
+      "exists": true,
+      "mtime": "2026-05-20T21:45:01.721902+00:00",
+      "size_bytes": 7793386
+    },
+    "audiocaps_val": {
+      "path": "/home/rwik/leiden_projects/MG-CLAP/embeddings/msclap/audiocaps__val.npz",
+      "exists": true,
+      "mtime": "2026-05-20T21:44:24.138277+00:00",
+      "size_bytes": 4510285
+    }
+  },
+  "data_shapes": {
+    "esc50_audio": [
+      2000,
+      1024
+    ],
+    "esc50_text": [
+      50,
+      1024
+    ],
+    "esc50_labels": [
+      2000
+    ],
+    "esc50_folds": [
+      2000
+    ]
+  },
+  "class_order": [
+    6,
+    40,
+    33,
+    38,
+    7,
+    46,
+    28,
+    45,
+    5,
+    34,
+    12,
+    18,
+    27,
+    3,
+    9,
+    39,
+    42,
+    23,
+    0,
+    26,
+    4,
+    10,
+    14,
+    41,
+    16,
+    43,
+    15,
+    48,
+    13,
+    24,
+    20,
+    25,
+    22,
+    49,
+    2,
+    11,
+    32,
+    44,
+    47,
+    17,
+    19,
+    37,
+    21,
+    29,
+    31,
+    30,
+    35,
+    36,
+    8,
+    1
+  ],
+  "class_names": [
+    "dog",
+    "rooster",
+    "pig",
+    "cow",
+    "frog",
+    "cat",
+    "hen",
+    "insects",
+    "sheep",
+    "crow",
+    "rain",
+    "sea waves",
+    "crackling fire",
+    "crickets",
+    "chirping birds",
+    "water drops",
+    "wind",
+    "pouring water",
+    "toilet flush",
+    "thunderstorm",
+    "crying baby",
+    "sneezing",
+    "clapping",
+    "breathing",
+    "coughing",
+    "footsteps",
+    "laughing",
+    "brushing teeth",
+    "snoring",
+    "drinking sipping",
+    "door wood knock",
+    "mouse click",
+    "keyboard typing",
+    "door wood creaks",
+    "can opening",
+    "washing machine",
+    "vacuum cleaner",
+    "clock alarm",
+    "clock tick",
+    "glass breaking",
+    "helicopter",
+    "chainsaw",
+    "siren",
+    "car horn",
+    "engine",
+    "train",
+    "church bells",
+    "airplane",
+    "fireworks",
+    "hand saw"
+  ],
+  "fold_list": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "methods_run": [
+    "zero_shot_clap",
+    "naive_adapter",
+    "mgp_only",
+    "mgc_only",
+    "mgp_mgc"
+  ],
+  "e_star_per_fold": {
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 2,
+    "5": 2
+  },
+  "final_table": [
+    {
+      "method": "mgc_only",
+      "beta": 4.0,
+      "fold": 1,
+      "seed": 2,
+      "Avg": 0.8693511904761906,
+      "Last": 0.79,
+      "forgetting_proxy": 0.22777777777777775,
+      "e_star": 2
+    },
+    {
+      "method": "mgc_only",
+      "beta": 4.0,
+      "fold": 2,
+      "seed": 2,
+      "Avg": 0.8689662698412699,
+      "Last": 0.7675,
+      "forgetting_proxy": 0.25555555555555554,
+      "e_star": 2
+    },
+    {
+      "method": "mgc_only",
+      "beta": 4.0,
+      "fold": 3,
+      "seed": 2,
+      "Avg": 0.8767549603174603,
+      "Last": 0.785,
+      "forgetting_proxy": 0.23611111111111105,
+      "e_star": 2
+    },
+    {
+      "method": "mgc_only",
+      "beta": 4.0,
+      "fold": 4,
+      "seed": 2,
+      "Avg": 0.8920396825396827,
+      "Last": 0.8175,
+      "forgetting_proxy": 0.20277777777777778,
+      "e_star": 2
+    },
+    {
+      "method": "mgc_only",
+      "beta": 4.0,
+      "fold": 5,
+      "seed": 2,
+      "Avg": 0.8740595238095239,
+      "Last": 0.7825,
+      "forgetting_proxy": 0.23888888888888887,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_mgc",
+      "beta": 4.0,
+      "fold": 1,
+      "seed": 2,
+      "Avg": 0.9834365079365079,
+      "Last": 0.9525,
+      "forgetting_proxy": 0.04444444444444446,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_mgc",
+      "beta": 4.0,
+      "fold": 2,
+      "seed": 2,
+      "Avg": 0.986452380952381,
+      "Last": 0.965,
+      "forgetting_proxy": 0.03333333333333334,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_mgc",
+      "beta": 4.0,
+      "fold": 3,
+      "seed": 2,
+      "Avg": 0.9784295634920636,
+      "Last": 0.9375,
+      "forgetting_proxy": 0.06388888888888888,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_mgc",
+      "beta": 4.0,
+      "fold": 4,
+      "seed": 2,
+      "Avg": 0.9854414682539684,
+      "Last": 0.96,
+      "forgetting_proxy": 0.04166666666666668,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_mgc",
+      "beta": 4.0,
+      "fold": 5,
+      "seed": 2,
+      "Avg": 0.9717013888888889,
+      "Last": 0.9375,
+      "forgetting_proxy": 0.06666666666666668,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_only",
+      "beta": 0.0,
+      "fold": 1,
+      "seed": 2,
+      "Avg": 0.9771170634920635,
+      "Last": 0.9475,
+      "forgetting_proxy": 0.0472222222222222,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_only",
+      "beta": 0.0,
+      "fold": 2,
+      "seed": 2,
+      "Avg": 0.9727113095238094,
+      "Last": 0.94,
+      "forgetting_proxy": 0.049999999999999996,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_only",
+      "beta": 0.0,
+      "fold": 3,
+      "seed": 2,
+      "Avg": 0.9743184523809523,
+      "Last": 0.93,
+      "forgetting_proxy": 0.0638888888888889,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_only",
+      "beta": 0.0,
+      "fold": 4,
+      "seed": 2,
+      "Avg": 0.9747896825396823,
+      "Last": 0.95,
+      "forgetting_proxy": 0.05000000000000001,
+      "e_star": 2
+    },
+    {
+      "method": "mgp_only",
+      "beta": 0.0,
+      "fold": 5,
+      "seed": 2,
+      "Avg": 0.970376984126984,
+      "Last": 0.9275,
+      "forgetting_proxy": 0.08055555555555556,
+      "e_star": 2
+    },
+    {
+      "method": "naive_adapter",
+      "beta": 0.0,
+      "fold": 1,
+      "seed": 2,
+      "Avg": 0.8728373015873017,
+      "Last": 0.77,
+      "forgetting_proxy": 0.24722222222222223,
+      "e_star": 2
+    },
+    {
+      "method": "naive_adapter",
+      "beta": 0.0,
+      "fold": 2,
+      "seed": 2,
+      "Avg": 0.8744801587301587,
+      "Last": 0.7875,
+      "forgetting_proxy": 0.23333333333333328,
+      "e_star": 2
+    },
+    {
+      "method": "naive_adapter",
+      "beta": 0.0,
+      "fold": 3,
+      "seed": 2,
+      "Avg": 0.8664226190476191,
+      "Last": 0.7575,
+      "forgetting_proxy": 0.26666666666666666,
+      "e_star": 2
+    },
+    {
+      "method": "naive_adapter",
+      "beta": 0.0,
+      "fold": 4,
+      "seed": 2,
+      "Avg": 0.8815079365079365,
+      "Last": 0.785,
+      "forgetting_proxy": 0.23888888888888887,
+      "e_star": 2
+    },
+    {
+      "method": "naive_adapter",
+      "beta": 0.0,
+      "fold": 5,
+      "seed": 2,
+      "Avg": 0.8478541666666667,
+      "Last": 0.725,
+      "forgetting_proxy": 0.3027777777777778,
+      "e_star": 2
+    },
+    {
+      "method": "zero_shot_clap",
+      "beta": 0.0,
+      "fold": 1,
+      "seed": 2,
+      "Avg": 0.9740218253968254,
+      "Last": 0.94,
+      "forgetting_proxy": 0.027777777777777776,
+      "e_star": 2
+    },
+    {
+      "method": "zero_shot_clap",
+      "beta": 0.0,
+      "fold": 2,
+      "seed": 2,
+      "Avg": 0.9872212301587302,
+      "Last": 0.965,
+      "forgetting_proxy": 0.011111111111111108,
+      "e_star": 2
+    },
+    {
+      "method": "zero_shot_clap",
+      "beta": 0.0,
+      "fold": 3,
+      "seed": 2,
+      "Avg": 0.9731190476190476,
+      "Last": 0.9325,
+      "forgetting_proxy": 0.044444444444444446,
+      "e_star": 2
+    },
+    {
+      "method": "zero_shot_clap",
+      "beta": 0.0,
+      "fold": 4,
+      "seed": 2,
+      "Avg": 0.9798402777777777,
+      "Last": 0.9475,
+      "forgetting_proxy": 0.030555555555555572,
+      "e_star": 2
+    },
+    {
+      "method": "zero_shot_clap",
+      "beta": 0.0,
+      "fold": 5,
+      "seed": 2,
+      "Avg": 0.9790257936507935,
+      "Last": 0.9325,
+      "forgetting_proxy": 0.05555555555555555,
+      "e_star": 2
+    }
+  ],
+  "aggregate_mean_std": [
+    {
+      "method": "mgc_only",
+      "beta": 4.0,
+      "folds": 5,
+      "Avg_mean": 0.8762343253968254,
+      "Avg_std": 0.008426295923741191,
+      "Last_mean": 0.7885,
+      "Last_std": 0.01632482771731452,
+      "forgetting_proxy_mean": 0.2322222222222222,
+      "forgetting_proxy_std": 0.017266966964355607
+    },
+    {
+      "method": "mgp_mgc",
+      "beta": 4.0,
+      "folds": 5,
+      "Avg_mean": 0.9810922619047618,
+      "Avg_std": 0.005448310203489182,
+      "Last_mean": 0.9504999999999999,
+      "Last_std": 0.01133578404875462,
+      "forgetting_proxy_mean": 0.05000000000000001,
+      "forgetting_proxy_std": 0.013028932666176192
+    },
+    {
+      "method": "mgp_only",
+      "beta": 0.0,
+      "folds": 5,
+      "Avg_mean": 0.9738626984126982,
+      "Avg_std": 0.002242043878970293,
+      "Last_mean": 0.9390000000000001,
+      "Last_std": 0.009027735042633876,
+      "forgetting_proxy_mean": 0.058333333333333334,
+      "forgetting_proxy_std": 0.01254621087848469
+    },
+    {
+      "method": "naive_adapter",
+      "beta": 0.0,
+      "folds": 5,
+      "Avg_mean": 0.8686204365079366,
+      "Avg_std": 0.011439181059660535,
+      "Last_mean": 0.765,
+      "Last_std": 0.022748626332154666,
+      "forgetting_proxy_mean": 0.2577777777777778,
+      "forgetting_proxy_std": 0.025178375985832602
+    },
+    {
+      "method": "zero_shot_clap",
+      "beta": 0.0,
+      "folds": 5,
+      "Avg_mean": 0.9786456349206348,
+      "Avg_std": 0.005040541788705243,
+      "Last_mean": 0.9435,
+      "Last_std": 0.012103718436910198,
+      "forgetting_proxy_mean": 0.03388888888888889,
+      "forgetting_proxy_std": 0.015153535218873172
+    }
+  ],
+  "presentation_safe_claims": [
+    "MG-CLAP-lite runs real ESC-50 continual-learning experiments only when real CLAP caches are present.",
+    "The adapter starts as an identity-like residual map and does not silently fall back to synthetic data.",
+    "The preservation rule is explicitly defined by task-1 negative audio-text similarity drift and recorded per fold.",
+    "Prototype compensation is reported as an exploratory beta sweep, not as silently tuned test-time optimization."
+  ],
+  "dangerous_claims_to_avoid": [
+    "Do not claim this is full CLAP continual fine-tuning; it is a frozen-embedding adapter study.",
+    "Do not claim beta was tuned on a held-out validation split in the current exploratory sweep.",
+    "Do not claim synthetic Figure 2 or Figure 3 artifacts elsewhere in the repo are real without re-running them.",
+    "Do not claim modality-gap preservation transfers unless the real continual-learning run is actually executed and inspected."
+  ],
+  "limitations": [
+    "No replay buffer or rehearsal memory is used.",
+    "Only the audio side is adapted; text embeddings remain frozen.",
+    "Continual results depend on cached ESC-50 and AudioCaps embeddings already extracted for the chosen backbone.",
+    "Best-beta summaries are exploratory because they summarize evaluation-fold performance."
+  ]
+}

@@ -1,0 +1,322 @@
+
+
+### Phase 2 run started 2026-05-21T04:20:57.881593 ###
+
+================================================================================
+[2026-05-21T04:20:57.881658] START MainGrid laion seed=0 order=canonical
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/main_grid/laion/seed_0
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/laion/seed_0
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/main_grid/laion/seed_0/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:21:08.653799] END MainGrid laion seed=0 order=canonical (exit=0, elapsed=10.8s)
+
+================================================================================
+[2026-05-21T04:21:08.653895] START MainGrid laion seed=1 order=shuffled
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 1 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order shuffled --out-dir /tmp/mgclap_phase2/main_grid/laion/seed_1
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/laion/seed_1
+================================================================================
+Traceback (most recent call last):
+  File "/home/rwik/leiden_projects/MG-CLAP/table_1_zero_shot/continual_mgclap.py", line 1063, in <module>
+    main()
+  File "/home/rwik/leiden_projects/MG-CLAP/table_1_zero_shot/continual_mgclap.py", line 1051, in main
+    (out_root / "summary.json").write_text(json.dumps(summary, indent=2))
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 325, in _iterencode_list
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/usr/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
+
+[2026-05-21T04:21:18.668795] END MainGrid laion seed=1 order=shuffled (exit=1, elapsed=10.0s)
+
+
+### Phase 2 run started 2026-05-21T04:25:10.316607 ###
+
+================================================================================
+[2026-05-21T04:25:10.316661] START MainGrid laion seed=1 order=shuffled
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 1 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order shuffled --out-dir /tmp/mgclap_phase2/main_grid/laion/seed_1
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/laion/seed_1
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/main_grid/laion/seed_1/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:25:20.684584] END MainGrid laion seed=1 order=shuffled (exit=0, elapsed=10.4s)
+
+================================================================================
+[2026-05-21T04:25:20.684689] START MainGrid laion seed=2 order=shuffled
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 2 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order shuffled --out-dir /tmp/mgclap_phase2/main_grid/laion/seed_2
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/laion/seed_2
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/main_grid/laion/seed_2/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:25:30.849001] END MainGrid laion seed=2 order=shuffled (exit=0, elapsed=10.2s)
+
+================================================================================
+[2026-05-21T04:25:30.849113] START MainGrid laion seed=3 order=shuffled
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 3 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order shuffled --out-dir /tmp/mgclap_phase2/main_grid/laion/seed_3
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/laion/seed_3
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/main_grid/laion/seed_3/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:25:42.059815] END MainGrid laion seed=3 order=shuffled (exit=0, elapsed=11.2s)
+
+================================================================================
+[2026-05-21T04:25:42.059914] START MainGrid msclap seed=0 order=canonical
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone msclap --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/main_grid/msclap/seed_0
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/msclap/seed_0
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/main_grid/msclap/seed_0/msclap
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset esc50
+
+[2026-05-21T04:25:52.611861] END MainGrid msclap seed=0 order=canonical (exit=0, elapsed=10.6s)
+
+================================================================================
+[2026-05-21T04:25:52.611961] START MainGrid msclap seed=1 order=shuffled
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone msclap --fold all --seed 1 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order shuffled --out-dir /tmp/mgclap_phase2/main_grid/msclap/seed_1
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/msclap/seed_1
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/main_grid/msclap/seed_1/msclap
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset esc50
+
+[2026-05-21T04:26:03.510892] END MainGrid msclap seed=1 order=shuffled (exit=0, elapsed=10.9s)
+
+================================================================================
+[2026-05-21T04:26:03.511001] START MainGrid msclap seed=2 order=shuffled
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone msclap --fold all --seed 2 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order shuffled --out-dir /tmp/mgclap_phase2/main_grid/msclap/seed_2
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/msclap/seed_2
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/main_grid/msclap/seed_2/msclap
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset esc50
+
+[2026-05-21T04:26:14.187048] END MainGrid msclap seed=2 order=shuffled (exit=0, elapsed=10.7s)
+
+================================================================================
+[2026-05-21T04:26:14.187215] START MainGrid msclap seed=3 order=shuffled
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone msclap --fold all --seed 3 --tasks 10 --classes-per-task 5 --alpha 0.10 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order shuffled --out-dir /tmp/mgclap_phase2/main_grid/msclap/seed_3
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/continual_mgclap_phase2/msclap/seed_3
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/main_grid/msclap/seed_3/msclap
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone msclap --dataset esc50
+
+[2026-05-21T04:26:24.526461] END MainGrid msclap seed=3 order=shuffled (exit=0, elapsed=10.3s)
+
+================================================================================
+[2026-05-21T04:26:24.526558] START AlphaRank laion alpha=0.05 rank=4
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.05 --adapter-rank 4 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p05__rank_04
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p05__rank_04
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p05__rank_04/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:26:36.172007] END AlphaRank laion alpha=0.05 rank=4 (exit=0, elapsed=11.6s)
+
+================================================================================
+[2026-05-21T04:26:36.172149] START AlphaRank laion alpha=0.05 rank=8
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.05 --adapter-rank 8 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p05__rank_08
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p05__rank_08
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p05__rank_08/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:26:47.077112] END AlphaRank laion alpha=0.05 rank=8 (exit=0, elapsed=10.9s)
+
+================================================================================
+[2026-05-21T04:26:47.077206] START AlphaRank laion alpha=0.05 rank=16
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.05 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p05__rank_16
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p05__rank_16
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p05__rank_16/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:26:58.072546] END AlphaRank laion alpha=0.05 rank=16 (exit=0, elapsed=11.0s)
+
+================================================================================
+[2026-05-21T04:26:58.072641] START AlphaRank laion alpha=0.05 rank=32
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.05 --adapter-rank 32 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p05__rank_32
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p05__rank_32
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p05__rank_32/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:27:08.472465] END AlphaRank laion alpha=0.05 rank=32 (exit=0, elapsed=10.4s)
+
+================================================================================
+[2026-05-21T04:27:08.472565] START AlphaRank laion alpha=0.10 rank=4
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.1 --adapter-rank 4 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p10__rank_04
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p10__rank_04
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p10__rank_04/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:27:20.467752] END AlphaRank laion alpha=0.10 rank=4 (exit=0, elapsed=12.0s)
+
+================================================================================
+[2026-05-21T04:27:20.467846] START AlphaRank laion alpha=0.10 rank=8
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.1 --adapter-rank 8 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p10__rank_08
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p10__rank_08
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p10__rank_08/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:27:32.058693] END AlphaRank laion alpha=0.10 rank=8 (exit=0, elapsed=11.6s)
+
+================================================================================
+[2026-05-21T04:27:32.058793] START AlphaRank laion alpha=0.10 rank=16
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.1 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p10__rank_16
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p10__rank_16
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p10__rank_16/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:27:42.751319] END AlphaRank laion alpha=0.10 rank=16 (exit=0, elapsed=10.7s)
+
+================================================================================
+[2026-05-21T04:27:42.751418] START AlphaRank laion alpha=0.10 rank=32
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.1 --adapter-rank 32 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p10__rank_32
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p10__rank_32
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p10__rank_32/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:27:53.519024] END AlphaRank laion alpha=0.10 rank=32 (exit=0, elapsed=10.8s)
+
+================================================================================
+[2026-05-21T04:27:53.519135] START AlphaRank laion alpha=0.20 rank=4
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.2 --adapter-rank 4 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_04
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p20__rank_04
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_04/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:28:11.631749] END AlphaRank laion alpha=0.20 rank=4 (exit=0, elapsed=18.1s)
+
+================================================================================
+[2026-05-21T04:28:11.631848] START AlphaRank laion alpha=0.20 rank=8
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.2 --adapter-rank 8 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_08
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p20__rank_08
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_08/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:28:32.473717] END AlphaRank laion alpha=0.20 rank=8 (exit=0, elapsed=20.8s)
+
+================================================================================
+[2026-05-21T04:28:32.473819] START AlphaRank laion alpha=0.20 rank=16
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.2 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_16
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p20__rank_16
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_16/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:28:52.337164] END AlphaRank laion alpha=0.20 rank=16 (exit=0, elapsed=19.9s)
+
+================================================================================
+[2026-05-21T04:28:52.337277] START AlphaRank laion alpha=0.20 rank=32
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.2 --adapter-rank 32 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_32
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p20__rank_32
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_32/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:29:10.928990] END AlphaRank laion alpha=0.20 rank=32 (exit=0, elapsed=18.6s)
+
+================================================================================
+[2026-05-21T04:29:10.929107] START AlphaRank laion alpha=0.30 rank=4
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.3 --adapter-rank 4 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p30__rank_04
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p30__rank_04
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p30__rank_04/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:29:24.550949] END AlphaRank laion alpha=0.30 rank=4 (exit=0, elapsed=13.6s)
+
+================================================================================
+[2026-05-21T04:29:24.551052] START AlphaRank laion alpha=0.30 rank=8
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.3 --adapter-rank 8 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p30__rank_08
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p30__rank_08
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p30__rank_08/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:29:37.010790] END AlphaRank laion alpha=0.30 rank=8 (exit=0, elapsed=12.5s)
+
+================================================================================
+[2026-05-21T04:29:37.010888] START AlphaRank laion alpha=0.30 rank=16
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.3 --adapter-rank 16 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p30__rank_16
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p30__rank_16
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p30__rank_16/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:29:48.541628] END AlphaRank laion alpha=0.30 rank=16 (exit=0, elapsed=11.5s)
+
+================================================================================
+[2026-05-21T04:29:48.541740] START AlphaRank laion alpha=0.30 rank=32
+COMMAND: /home/rwik/leiden_projects/MG-CLAP/venv/bin/python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.3 --adapter-rank 32 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p30__rank_32
+FINAL_DIR: /home/rwik/leiden_projects/MG-CLAP/results/ablations/laion_alpha_rank/alpha_0p30__rank_32
+================================================================================
+MG-CLAP-lite results written to /tmp/mgclap_phase2/alpha_rank/alpha_0p30__rank_32/laion
+If you need to generate caches first, run:
+  python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+  python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+
+[2026-05-21T04:29:59.873358] END AlphaRank laion alpha=0.30 rank=32 (exit=0, elapsed=11.3s)

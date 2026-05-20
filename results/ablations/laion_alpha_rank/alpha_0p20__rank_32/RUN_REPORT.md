@@ -1,0 +1,86 @@
+# MG-CLAP-lite Run Report
+
+## What Was Run
+
+- Command: `table_1_zero_shot/continual_mgclap.py --backbone laion --fold all --seed 0 --tasks 10 --classes-per-task 5 --alpha 0.2 --adapter-rank 32 --epochs-max 20 --lr 1e-3 --weight-decay 1e-4 --batch-size 64 --betas 4 --class-order canonical --out-dir /tmp/mgclap_phase2/alpha_rank/alpha_0p20__rank_32`
+- Backbone: `laion`
+- Folds: `[1, 2, 3, 4, 5]`
+- Tasks x classes/task: `10 x 5`
+- Dry run: `False`
+
+## What Was Implemented
+
+- Zero-shot CLAP baseline
+- Sequential low-rank residual audio adapter
+- Modality-gap preservation epoch selection via task-1 negative-similarity drift
+- Audio prototype compensation head with explicit beta sweep
+- Fold-wise summary, trajectories, and provenance metadata
+
+## What Remains Synthetic Elsewhere In The Repo
+
+- Current saved Figure 2 outputs are still synthetic/random-init stand-ins.
+- Current saved Figure 3 outputs may still be synthetic unless re-run with `--real`.
+- Current saved Table 1 shift outputs may still be synthetic unless re-run in shift mode with real caches.
+
+## Main Table
+
+| method | beta | fold | Avg | Last | forgetting_proxy | e_star |
+|---|---:|---:|---:|---:|---:|---:|
+| mgc_only | 4.0 | 1 | 0.7293 | 0.6675 | 0.3556 | 4 |
+| mgc_only | 4.0 | 2 | 0.7137 | 0.6375 | 0.3917 | 4 |
+| mgc_only | 4.0 | 3 | 0.7488 | 0.7100 | 0.3111 | 4 |
+| mgc_only | 4.0 | 4 | 0.7286 | 0.6450 | 0.3778 | 4 |
+| mgc_only | 4.0 | 5 | 0.7010 | 0.6375 | 0.3944 | 4 |
+| mgp_mgc | 4.0 | 1 | 0.9065 | 0.8625 | 0.1361 | 4 |
+| mgp_mgc | 4.0 | 2 | 0.9210 | 0.8475 | 0.1556 | 4 |
+| mgp_mgc | 4.0 | 3 | 0.9244 | 0.8900 | 0.1167 | 4 |
+| mgp_mgc | 4.0 | 4 | 0.9167 | 0.8800 | 0.1083 | 4 |
+| mgp_mgc | 4.0 | 5 | 0.8968 | 0.8200 | 0.1806 | 4 |
+| mgp_only | 0.0 | 1 | 0.8092 | 0.7950 | 0.2083 | 4 |
+| mgp_only | 0.0 | 2 | 0.7972 | 0.7725 | 0.2306 | 4 |
+| mgp_only | 0.0 | 3 | 0.8339 | 0.8175 | 0.1806 | 4 |
+| mgp_only | 0.0 | 4 | 0.8272 | 0.7875 | 0.2083 | 4 |
+| mgp_only | 0.0 | 5 | 0.8008 | 0.8000 | 0.1806 | 4 |
+| naive_adapter | 0.0 | 1 | 0.6859 | 0.6200 | 0.4083 | 4 |
+| naive_adapter | 0.0 | 2 | 0.6812 | 0.5425 | 0.4972 | 4 |
+| naive_adapter | 0.0 | 3 | 0.7006 | 0.6250 | 0.4056 | 4 |
+| naive_adapter | 0.0 | 4 | 0.7012 | 0.6050 | 0.4222 | 4 |
+| naive_adapter | 0.0 | 5 | 0.6824 | 0.5925 | 0.4500 | 4 |
+| zero_shot_clap | 0.0 | 1 | 0.8187 | 0.8425 | 0.0389 | 4 |
+| zero_shot_clap | 0.0 | 2 | 0.8184 | 0.8200 | 0.0556 | 4 |
+| zero_shot_clap | 0.0 | 3 | 0.8197 | 0.8275 | 0.0472 | 4 |
+| zero_shot_clap | 0.0 | 4 | 0.8094 | 0.8375 | 0.0306 | 4 |
+| zero_shot_clap | 0.0 | 5 | 0.8217 | 0.8275 | 0.0500 | 4 |
+
+## Interpretation
+
+- `mgp_only` tests whether limiting drift in negative audio-text similarity stabilizes continual learning.
+- `mgc_only` tests whether audio-space prototypes compensate for text-only classifier limits.
+- `mgp_mgc` tests the combination. Beta is an exploratory sweep, not a hidden validation-tuned parameter.
+
+## Limitations
+
+- Frozen-embedding MG-CLAP-lite is not full CLAP fine-tuning.
+- No replay buffer is used.
+- Beta sweep is exploratory and uses the evaluation folds directly in the current implementation summary.
+- This run does not retroactively certify provenance of older result files elsewhere in the repo.
+
+## Presentation-Safe Claims
+
+- MG-CLAP-lite runs real ESC-50 continual-learning experiments only when real CLAP caches are present.
+- The adapter starts as an identity-like residual map and does not silently fall back to synthetic data.
+- The preservation rule is explicitly defined by task-1 negative audio-text similarity drift and recorded per fold.
+- Prototype compensation is reported as an exploratory beta sweep, not as silently tuned test-time optimization.
+
+## Claims To Avoid
+
+- Do not claim this is full CLAP continual fine-tuning; it is a frozen-embedding adapter study.
+- Do not claim beta was tuned on a held-out validation split in the current exploratory sweep.
+- Do not claim synthetic Figure 2 or Figure 3 artifacts elsewhere in the repo are real without re-running them.
+- Do not claim modality-gap preservation transfers unless the real continual-learning run is actually executed and inspected.
+
+## Next Experiments
+
+- Run all five ESC-50 folds for both backbones.
+- Compare best-beta-by-Avg against the text-only continual baselines.
+- Re-run real Table 1 shift and real Figure 3 with provenance-enabled summaries.
