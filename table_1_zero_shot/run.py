@@ -39,6 +39,7 @@ sys.path.insert(0, str(ROOT))
 from lib.gap_utils import (  # noqa: E402
     gap_distance, gap_vector, l2_normalize, shift_features,
 )
+from lib.provenance import command_string, file_info, get_git_commit, machine_info, utc_timestamp  # noqa: E402
 from lib.synth import synth_class_prompts, synth_paired_embeddings  # noqa: E402
 
 
@@ -217,18 +218,48 @@ def main() -> None:
 
     out_dir = ROOT / "results" / "table_1" / (args.mode if args.mode == "simulation" else f"{args.backbone}-shift")
     out_dir.mkdir(parents=True, exist_ok=True)
+    esc50_cache = ROOT / "embeddings" / args.backbone / "esc50.npz"
+    audiocaps_cache = ROOT / "embeddings" / args.backbone / f"audiocaps__{args.split}.npz"
 
     if args.mode == "shift":
         data = run_shift_mode(args)
         if not data:
-            return
+            raise SystemExit(1)
         title = f"Table 1 — ESC-50 zero-shot under shift ({args.backbone})"
+        mode = "real"
+        data_shapes = {
+            "audiocaps_cache_exists": audiocaps_cache.exists(),
+            "esc50_cache_exists": esc50_cache.exists(),
+        }
     else:
         data = run_simulation_mode(args)
         title = f"Table 1 (simulation) — synthetic gap sweep, {args.n_classes} classes"
+        mode = "synthetic"
+        data_shapes = {
+            "n_classes": args.n_classes,
+            "n_per_class": args.n_per_class,
+        }
 
     plot_sweep(data, out_dir / "shift_sweep.png", title=title)
-    (out_dir / "summary.json").write_text(json.dumps(data, indent=2, default=float))
+    payload = {
+        "mode": mode,
+        "backbone": args.backbone,
+        "timestamp": utc_timestamp(),
+        "command": command_string(),
+        "git_commit": get_git_commit(ROOT),
+        "machine_info": machine_info(),
+        "input_cache_paths": {
+            "esc50": file_info(esc50_cache),
+            "audiocaps_val": file_info(audiocaps_cache),
+        },
+        "input_cache_exists": {
+            "esc50": esc50_cache.exists(),
+            "audiocaps_val": audiocaps_cache.exists(),
+        },
+        "data_shapes": data_shapes,
+        "results": data,
+    }
+    (out_dir / "summary.json").write_text(json.dumps(payload, indent=2, default=float))
     print(f"\nresults under {out_dir}")
 
 

@@ -1,0 +1,154 @@
+{
+  "timestamp": "2026-05-20T19:51:03.078819+00:00",
+  "git_commit": "8f3ff755e36f4c5eff20d8648a34c25e461a3c52",
+  "command": "scripts/summarize_mgclap_project.py",
+  "machine_info": {
+    "hostname": "PROENG93",
+    "platform": "Linux-6.11.0-29-generic-x86_64-with-glibc2.39",
+    "python": "3.10.16 (main, Dec  4 2024, 08:53:38) [GCC 13.2.0]",
+    "executable": "/home/rwik/probe/mca_v3_document_ai/venv2/bin/python",
+    "processor": "x86_64",
+    "pid": 2809281
+  },
+  "items": [
+    {
+      "name": "figure_1/laion-audiocaps-val",
+      "status": "real-data",
+      "safe_for_presentation": true,
+      "notes": "Real AudioCaps gap stats.",
+      "files": [
+        {
+          "path": "/home/rwik/leiden_projects/MG-CLAP/results/figure_1/laion-audiocaps-val/stats.json",
+          "exists": true,
+          "mtime": "2026-05-18T12:15:42.132861+00:00",
+          "size_bytes": 335
+        }
+      ]
+    },
+    {
+      "name": "figure_1/msclap-audiocaps-val",
+      "status": "real-data",
+      "safe_for_presentation": true,
+      "notes": "Real AudioCaps gap stats.",
+      "files": [
+        {
+          "path": "/home/rwik/leiden_projects/MG-CLAP/results/figure_1/msclap-audiocaps-val/stats.json",
+          "exists": true,
+          "mtime": "2026-05-18T12:15:42.134861+00:00",
+          "size_bytes": 334
+        }
+      ]
+    },
+    {
+      "name": "figure_3/synth-gap0.82",
+      "status": "synthetic",
+      "safe_for_presentation": false,
+      "notes": "Synthetic Figure 3 run.",
+      "files": [
+        {
+          "path": "/home/rwik/leiden_projects/MG-CLAP/results/figure_3/synth-gap0.82/3a_gap_stats.json",
+          "exists": true,
+          "mtime": "2026-05-18T12:15:42.140861+00:00",
+          "size_bytes": 398
+        },
+        {
+          "path": "/home/rwik/leiden_projects/MG-CLAP/results/figure_3/synth-gap0.82/3b_landscape.json",
+          "exists": true,
+          "mtime": "2026-05-18T12:15:42.141861+00:00",
+          "size_bytes": 18161
+        }
+      ]
+    },
+    {
+      "name": "table_1/simulation",
+      "status": "synthetic",
+      "safe_for_presentation": false,
+      "notes": "Synthetic zero-shot shift sweep.",
+      "files": [
+        {
+          "path": "/home/rwik/leiden_projects/MG-CLAP/results/table_1/simulation/summary.json",
+          "exists": true,
+          "mtime": "2026-05-18T12:15:42.147861+00:00",
+          "size_bytes": 2698
+        }
+      ]
+    },
+    {
+      "name": "table_1/laion-shift",
+      "status": "missing",
+      "safe_for_presentation": false,
+      "notes": "Missing real shift summary.",
+      "files": [
+        {
+          "path": "/home/rwik/leiden_projects/MG-CLAP/results/table_1/laion-shift/summary.json",
+          "exists": false,
+          "mtime": null,
+          "size_bytes": null
+        }
+      ]
+    },
+    {
+      "name": "table_1/msclap-shift",
+      "status": "missing",
+      "safe_for_presentation": false,
+      "notes": "Missing real shift summary.",
+      "files": [
+        {
+          "path": "/home/rwik/leiden_projects/MG-CLAP/results/table_1/msclap-shift/summary.json",
+          "exists": false,
+          "mtime": null,
+          "size_bytes": null
+        }
+      ]
+    },
+    {
+      "name": "table_1_training/laion",
+      "status": "unclear-provenance",
+      "safe_for_presentation": false,
+      "notes": "Training sweep exists but provenance may be mixed or absent.",
+      "files": [
+        {
+          "path": "/home/rwik/leiden_projects/MG-CLAP/results/table_1_training/laion/sweep.json",
+          "exists": true,
+          "mtime": "2026-05-18T12:15:42.147861+00:00",
+          "size_bytes": 5411
+        }
+      ]
+    },
+    {
+      "name": "continual_mgclap",
+      "status": "missing",
+      "safe_for_presentation": false,
+      "notes": "No continual results yet.",
+      "files": []
+    }
+  ],
+  "safe_for_presentation": [
+    "figure_1/laion-audiocaps-val",
+    "figure_1/msclap-audiocaps-val"
+  ],
+  "not_safe_for_presentation": [
+    "figure_3/synth-gap0.82",
+    "table_1/simulation",
+    "table_1/laion-shift",
+    "table_1/msclap-shift",
+    "table_1_training/laion",
+    "continual_mgclap"
+  ],
+  "missing_results": [
+    "table_1/laion-shift",
+    "table_1/msclap-shift",
+    "continual_mgclap"
+  ],
+  "real_esc50_continual_learning_exists": false,
+  "real_esc50_shift_exists": false,
+  "real_clap_figure3_exists": false,
+  "what_remains_to_run": [
+    "figure_3/synth-gap0.82",
+    "table_1/simulation",
+    "table_1/laion-shift",
+    "table_1/msclap-shift",
+    "table_1_training/laion",
+    "continual_mgclap"
+  ]
+}

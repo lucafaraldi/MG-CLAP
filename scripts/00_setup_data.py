@@ -47,6 +47,38 @@ AUDIOCAPS_CSVS = {
 ESC50_ZIP = "https://github.com/karoldvl/ESC-50/archive/master.zip"
 
 
+def _venv_bin(name: str) -> str | None:
+    candidate = Path(sys.executable).parent / name
+    return str(candidate) if candidate.exists() else None
+
+
+def _resolve_ytdlp() -> str:
+    local = _venv_bin("yt-dlp")
+    if local is not None:
+        return local
+    global_path = shutil.which("yt-dlp")
+    if global_path is None:
+        raise FileNotFoundError(
+            "yt-dlp not found. Install it into the active venv or put it on PATH."
+        )
+    return global_path
+
+
+def _resolve_ffmpeg() -> str | None:
+    local = _venv_bin("ffmpeg")
+    if local is not None:
+        return local
+    global_path = shutil.which("ffmpeg")
+    if global_path is not None:
+        return global_path
+    try:
+        import imageio_ffmpeg
+
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        return None
+
+
 # ---------------------------------------------------------------------------
 # AudioCaps
 # ---------------------------------------------------------------------------
@@ -67,17 +99,25 @@ def _ytdlp(youtube_id: str, start: float, out_path: Path, duration: float = 10.0
         return True
     out_path.parent.mkdir(parents=True, exist_ok=True)
     url = f"https://www.youtube.com/watch?v={youtube_id}"
+    ytdlp_bin = _resolve_ytdlp()
+    ffmpeg_bin = _resolve_ffmpeg()
     cmd = [
-        "yt-dlp",
+        ytdlp_bin,
         "--quiet",
         "--no-warnings",
         "-x",
         "--audio-format", "wav",
-        "--postprocessor-args",
-        f"ffmpeg:-ss {start} -t {duration} -ac 1 -ar 48000",
         "-o", str(out_path.with_suffix(".%(ext)s")),
         url,
     ]
+    if ffmpeg_bin is not None:
+        cmd.extend(["--ffmpeg-location", ffmpeg_bin])
+        cmd.extend(
+            [
+                "--postprocessor-args",
+                f"ffmpeg:-ss {start} -t {duration} -ac 1 -ar 48000",
+            ]
+        )
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         return out_path.exists() and result.returncode == 0

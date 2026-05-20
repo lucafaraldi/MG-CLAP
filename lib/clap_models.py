@@ -227,6 +227,7 @@ class MicrosoftCLAP(CLAPBackbone):
             use_cuda = torch.cuda.is_available()
         self._torch = torch
         self.model = CLAP(version=version, use_cuda=use_cuda)
+        self._patch_audio_loader()
 
         self.info = BackboneInfo(
             name=f"msclap-{version}",
@@ -234,6 +235,42 @@ class MicrosoftCLAP(CLAPBackbone):
             sample_rate=44_100,
             notes=f"version={version}",
         )
+
+    def _patch_audio_loader(self) -> None:
+        """Avoid torchaudio/torchcodec runtime requirements in msclap.
+
+        The upstream wrapper calls ``torchaudio.load`` directly, which on newer
+        torchaudio builds may route through TorchCodec and require system FFmpeg
+        shared libraries. For this repo we already depend on soundfile/librosa,
+        so patch the instance method to use those instead.
+        """
+        import types
+
+        try:
+            import librosa  # type: ignore
+            import soundfile as sf  # type: ignore
+        except ImportError:
+            return
+
+        torch = self._torch
+
+        def _read_audio(model_self, audio_path, resample=True):
+            target_sr = int(getattr(model_self.args, "sampling_rate", 44_100))
+            if resample:
+                audio, sample_rate = librosa.load(
+                    str(audio_path), sr=target_sr, mono=True
+                )
+            else:
+                audio, sample_rate = sf.read(str(audio_path), always_2d=False)
+                if isinstance(audio, np.ndarray) and audio.ndim > 1:
+                    audio = audio.mean(axis=1)
+                audio = np.asarray(audio, dtype=np.float32)
+            if not isinstance(audio, np.ndarray):
+                audio = np.asarray(audio, dtype=np.float32)
+            audio = audio.astype(np.float32, copy=False)
+            return torch.from_numpy(audio).reshape(1, -1), target_sr if resample else int(sample_rate)
+
+        self.model.read_audio = types.MethodType(_read_audio, self.model)
 
     def encode_audio(
         self,

@@ -56,6 +56,7 @@ from table_1_zero_shot.training.datasets import EmbeddingPairs  # noqa: E402
 from table_1_zero_shot.training.utils import (  # noqa: E402
     DualEncoderHead, info_nce_torch, measure_gap,
 )
+from lib.provenance import command_string, file_info, get_git_commit, machine_info, torch_info, utc_timestamp  # noqa: E402
 from lib.synth import synth_paired_embeddings  # noqa: E402
 
 
@@ -65,12 +66,12 @@ def load_embeddings(backbone: str, split: str, synthetic_fallback: bool):
     if cache.exists():
         ds = EmbeddingPairs.from_cache(cache)
         print(f"[real] loaded {len(ds)} pairs from {cache}")
-        return ds
+        return ds, "real", cache
     if not synthetic_fallback:
         raise FileNotFoundError(f"no cache and synthetic fallback disabled: {cache}")
     print(f"[warn] no cache at {cache}; falling back to synthetic 400 pairs")
     a, t = synth_paired_embeddings(n=400, d=512, gap=0.6, seed=0)
-    return EmbeddingPairs(a.astype(np.float32), t.astype(np.float32))
+    return EmbeddingPairs(a.astype(np.float32), t.astype(np.float32)), "synthetic", cache
 
 
 def pick_device(arg: str) -> torch.device:
@@ -284,7 +285,7 @@ def main() -> None:
     device = pick_device(args.device)
     print(f"device: {device}")
 
-    ds = load_embeddings(args.backbone, args.split, synthetic_fallback=args.allow_synthetic)
+    ds, mode, cache_path = load_embeddings(args.backbone, args.split, synthetic_fallback=args.allow_synthetic)
     print(f"dataset: {len(ds)} pairs  audio_dim={ds.audio.shape[1]}  text_dim={ds.text.shape[1]}")
 
     print(f"\nsweep: |τ|={len(args.temperatures)}  |init|={len(args.init_gaps)}  |seeds|={len(args.seeds)}")
@@ -299,7 +300,21 @@ def main() -> None:
         seeds=args.seeds,
     )
 
-    (out_dir / "sweep.json").write_text(json.dumps(results, indent=2))
+    payload = {
+        "mode": mode,
+        "backbone": args.backbone,
+        "timestamp": utc_timestamp(),
+        "command": command_string(),
+        "git_commit": get_git_commit(ROOT),
+        "machine_info": machine_info(),
+        "torch_info": torch_info(),
+        "input_cache_paths": {"audiocaps_val": file_info(cache_path)},
+        "input_cache_exists": {"audiocaps_val": cache_path.exists()},
+        "data_shapes": {"audio": list(ds.audio.shape), "text": list(ds.text.shape)},
+        "results": results,
+    }
+    (out_dir / "sweep.json").write_text(json.dumps(payload, indent=2))
+    (out_dir / "sweep_legacy_results.json").write_text(json.dumps(results, indent=2))
     plot_sweeps(results, out_dir)
     print(f"\nresults under {out_dir}")
 

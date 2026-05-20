@@ -36,6 +36,7 @@ sys.path.insert(0, str(ROOT))
 from lib.gap_utils import (  # noqa: E402
     gap_distance, gap_vector, info_nce_loss, l2_normalize, shift_features,
 )
+from lib.provenance import command_string, file_info, get_git_commit, machine_info, utc_timestamp  # noqa: E402
 from lib.synth import synth_paired_embeddings  # noqa: E402
 
 
@@ -221,7 +222,7 @@ def load_real(backbone: str, split: str = "val"):
             f"No cache: {cache}.  Run scripts/01_extract_embeddings.py first."
         )
     data = np.load(cache, allow_pickle=True)
-    return data["audio"], data["text"]
+    return data["audio"], data["text"], cache
 
 
 def main() -> None:
@@ -229,7 +230,9 @@ def main() -> None:
     p.add_argument("--backbone", choices=["laion", "msclap"], default="laion")
     p.add_argument("--split", default="val")
     p.add_argument("--real", action="store_true",
-                   help="Use real CLAP embeddings instead of synthetic. Falls back if absent.")
+                   help="Use real CLAP embeddings instead of synthetic.")
+    p.add_argument("--allow-synthetic-fallback", action="store_true",
+                   help="If set together with --real, missing caches fall back to synthetic.")
     p.add_argument("--n-synth", type=int, default=400)
     p.add_argument("--gap-synth", type=float, default=0.82)
     p.add_argument(
@@ -248,10 +251,14 @@ def main() -> None:
 
     if args.real:
         try:
-            audio, text = load_real(args.backbone, args.split)
+            audio, text, cache = load_real(args.backbone, args.split)
             tag = f"{args.backbone}-audiocaps-{args.split}"
+            mode = "real"
             print(f"[real] using {args.backbone} on AudioCaps {args.split} ({audio.shape[0]} pairs)")
         except FileNotFoundError as e:
+            if not args.allow_synthetic_fallback:
+                print(f"[error] {e}")
+                raise SystemExit(1)
             print(f"[warn] {e}\n[warn] falling back to synthetic")
             args.real = False
     if not args.real:
@@ -259,16 +266,29 @@ def main() -> None:
             n=args.n_synth, d=512, gap=args.gap_synth, seed=0,
         )
         tag = f"synth-gap{args.gap_synth}"
+        cache = ROOT / "embeddings" / args.backbone / f"audiocaps__{args.split}.npz"
+        mode = "synthetic"
         print(f"[synthetic] n={args.n_synth} pairs, target gap={args.gap_synth}")
 
     out_dir = ROOT / "results" / "figure_3" / tag
     out_dir.mkdir(parents=True, exist_ok=True)
+    metadata = {
+        "mode": mode,
+        "backbone": args.backbone,
+        "timestamp": utc_timestamp(),
+        "command": command_string(),
+        "git_commit": get_git_commit(ROOT),
+        "machine_info": machine_info(),
+        "input_cache_paths": {"audiocaps_val": file_info(cache)},
+        "input_cache_exists": {"audiocaps_val": cache.exists()},
+        "data_shapes": {"audio": list(audio.shape), "text": list(text.shape)},
+    }
 
     # 3a
     print("\n[3a] gap stats:")
     stats = gap_stats_on_data(audio, text)
     print(json.dumps(stats, indent=2))
-    (out_dir / "3a_gap_stats.json").write_text(json.dumps(stats, indent=2))
+    (out_dir / "3a_gap_stats.json").write_text(json.dumps({**metadata, "results": stats}, indent=2))
 
     # 3b
     print("\n[3b] sweeping loss landscape...")
@@ -284,7 +304,7 @@ def main() -> None:
         landscape, out_dir / "3b_loss_landscape.png",
         title=f"Figure 3b — InfoNCE vs gap distance ({tag})",
     )
-    (out_dir / "3b_landscape.json").write_text(json.dumps(landscape, indent=2))
+    (out_dir / "3b_landscape.json").write_text(json.dumps({**metadata, "results": landscape}, indent=2))
 
     # 3c — 3D sphere snapshots at a few λ values
     print(f"\n[3c] 3D-sphere snapshots at λ={args.lambdas_3c}")
@@ -298,7 +318,7 @@ def main() -> None:
     print("\n[3d] optimizing λ under InfoNCE...")
     traj = optimize_gap(audio, text, tuple(args.temperatures), n_iters=args.n_iters)
     plot_optimization(traj, out_dir / "3d_optimization.png")
-    (out_dir / "3d_optimization.json").write_text(json.dumps(traj, indent=2))
+    (out_dir / "3d_optimization.json").write_text(json.dumps({**metadata, "results": traj}, indent=2))
     for tau, t in sorted(traj.items()):
         print(f"  τ={tau:.4g}  final gap={t[-1]['gap']:.3f}  final loss={t[-1]['loss']:.3f}")
 

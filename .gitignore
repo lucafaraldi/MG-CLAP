@@ -1,0 +1,9 @@
+data/
+embeddings/
+__pycache__/
+.DS_Store
+*.pyc
+.venv/
+results/**/*.tmp
+.idea/
+handoff/

@@ -20,6 +20,18 @@ one with audio replacing images:
 | Table 1 — zero-shot accuracy under embedding shift (CIFAR/EuroSAT/…) | Zero-shot accuracy on **ESC-50** under shift (5-fold) |
 | Table 2 — FairFace/CelebA denigration bias under shift | No clean audio analog — see `table_2_fairness/README.md` for decision |
 
+## Current Status
+
+This repository is not a full end-to-end reproduction of every original result.
+The implementation status is:
+
+- `Figure 1`: real-data capable and already saved on AudioCaps for LAION-CLAP and MSCLAP.
+- `Figure 2`: currently synthetic/random-init cone probes unless you explicitly run a real-cache variant.
+- `Figure 3`: supports both synthetic and real-cache runs; check the saved result folder name and JSON metadata before claiming a result is real.
+- `Table 1 shift`: supports both synthetic and real-cache runs; saved `simulation/` outputs are synthetic.
+- `Table 1 training`: lightweight frozen-embedding training sweep, not full CLAP training.
+- `MG-CLAP-lite continual learning`: real ESC-50 class-incremental experiment on cached CLAP embeddings, added as an extension in `table_1_zero_shot/continual_mgclap.py`.
+
 ## Theory cheat sheet
 
 - **L2-normalized embeddings live on the unit hypersphere.**
@@ -51,11 +63,12 @@ mind_the_gap_CLAP/
 ├── figure_2_cone_effect/      # Fig 2: random-init cone (a, b, c)
 ├── figure_3_contrastive_learning/  # Fig 3: loss-landscape sphere experiment
 ├── table_1_zero_shot/         # Table 1: ESC-50 zero-shot vs shift
+│   └── continual_mgclap.py    # MG-CLAP-lite continual learning extension
 ├── table_2_fairness/          # Table 2: decision doc (no clean audio analog)
 ├── data/                      # raw datasets (gitignored)
 ├── embeddings/                # cached .npz embeddings (gitignored)
 ├── results/                   # figures + numerical results
-└── notebooks/                 # optional Jupyter wrappers
+└── docs/                      # extra notes, including MG-CLAP-lite
 ```
 
 ## Setup
@@ -124,13 +137,98 @@ python table_1_zero_shot/training/train_clap.py --backbone laion \
 
 # Figure 2c — pretrained-encoder cone scatter (uses cached embeddings)
 python figure_2_cone_effect/2c_scatter_cones/run_pretrained.py
-```
 
-A full reproduction audit mapping every notebook in the original repo to this
-port lives at [`docs/AUDIT.md`](docs/AUDIT.md).
+# MG-CLAP-lite continual learning
+python table_1_zero_shot/continual_mgclap.py --backbone laion --fold 1 --dry-run
+python table_1_zero_shot/continual_mgclap.py --backbone laion --fold all
+```
 
 Outputs land under `results/` (figures + JSON / CSV summary tables) and
 `embeddings/` (`.npz` caches).
+
+## MG-CLAP-lite Continual Learning Extension
+
+The continual-learning extension tests two transfer hypotheses from MG-CLIP on
+frozen CLAP embeddings:
+
+- `Modality-gap preservation`: monitor negative audio-text similarity drift and
+  use a task-1 stopping rule based on relative drift crossing `alpha`.
+- `Modality-gap compensation`: add an audio-space prototype classifier and
+  combine it with the text classifier by a sweep over `beta`.
+
+This is intentionally a lightweight frozen-embedding study rather than full
+CLAP fine-tuning. See [docs/MG_CLAP_LITE.md](docs/MG_CLAP_LITE.md) for the exact
+design, limitations, and run instructions.
+
+### Exact Commands
+
+Check what exists:
+
+```bash
+ls -R embeddings data results | head -300
+```
+
+If caches are missing:
+
+```bash
+python scripts/01_extract_embeddings.py --backbone laion --dataset audiocaps --split val
+python scripts/01_extract_embeddings.py --backbone laion --dataset esc50
+```
+
+Optional MSCLAP caches:
+
+```bash
+python scripts/01_extract_embeddings.py --backbone msclap --dataset audiocaps --split val
+python scripts/01_extract_embeddings.py --backbone msclap --dataset esc50
+```
+
+Smoke test:
+
+```bash
+python table_1_zero_shot/continual_mgclap.py --backbone laion --fold 1 --dry-run
+```
+
+Full LAION run:
+
+```bash
+python table_1_zero_shot/continual_mgclap.py \
+  --backbone laion \
+  --fold all \
+  --tasks 10 \
+  --classes-per-task 5 \
+  --alpha 0.10 \
+  --adapter-rank 16 \
+  --epochs-max 20 \
+  --lr 1e-3 \
+  --weight-decay 1e-4 \
+  --batch-size 64 \
+  --betas 0 1 2 4 8 \
+  --seed 0
+```
+
+Optional MSCLAP run:
+
+```bash
+python table_1_zero_shot/continual_mgclap.py \
+  --backbone msclap \
+  --fold all \
+  --tasks 10 \
+  --classes-per-task 5 \
+  --alpha 0.10 \
+  --adapter-rank 16 \
+  --epochs-max 20 \
+  --lr 1e-3 \
+  --weight-decay 1e-4 \
+  --batch-size 64 \
+  --betas 0 1 2 4 8 \
+  --seed 0
+```
+
+Project status summary:
+
+```bash
+python scripts/summarize_mgclap_project.py
+```
 
 ## Citation
 
