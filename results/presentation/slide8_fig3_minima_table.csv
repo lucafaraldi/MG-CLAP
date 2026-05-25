@@ -1,0 +1,13 @@
+backbone,tau,best_lambda,gap_distance_at_min_loss,minimum_loss,source_file
+laion,0.01,-0.5,0.8523964129338271,5.469796050120296,results/figure_3/laion-audiocaps-val/3b_landscape.json
+laion,0.02,-0.5,0.8523964129338271,3.5035200382270633,results/figure_3/laion-audiocaps-val/3b_landscape.json
+laion,0.03333333333333333,-0.19999999999999996,0.6270559990132364,2.882769235126716,results/figure_3/laion-audiocaps-val/3b_landscape.json
+laion,0.05,0.15000000000000002,0.3274297357953491,2.6844145187728747,results/figure_3/laion-audiocaps-val/3b_landscape.json
+laion,0.1,0.45000000000000007,0.05071123741412158,3.0175493157513094,results/figure_3/laion-audiocaps-val/3b_landscape.json
+laion,1.0,0.5,0.00715639193723847,5.876270270398308,results/figure_3/laion-audiocaps-val/3b_landscape.json
+msclap,0.01,1.5,1.275166425402788,5.022634905019679,results/figure_3/msclap-audiocaps-val/3b_landscape.json
+msclap,0.02,1.5,1.275166425402788,3.5064986962420273,results/figure_3/msclap-audiocaps-val/3b_landscape.json
+msclap,0.03333333333333333,0.5,0.02311735445617118,3.2385186043068606,results/figure_3/msclap-audiocaps-val/3b_landscape.json
+msclap,0.05,0.5,0.02311735445617118,3.1328101817752456,results/figure_3/msclap-audiocaps-val/3b_landscape.json
+msclap,0.1,0.5,0.02311735445617118,3.775277364109897,results/figure_3/msclap-audiocaps-val/3b_landscape.json
+msclap,1.0,0.5,0.02311735445617118,6.035980057524903,results/figure_3/msclap-audiocaps-val/3b_landscape.json
